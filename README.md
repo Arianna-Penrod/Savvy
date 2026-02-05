@@ -24,6 +24,20 @@ Describe how to use your project, including code examples or screenshots.
 
 
 
+### Features
+1. Expense & Receipt Tracking
+     - Log purchases via scanning receipts
+     - Store purchase history
+2. Cheaper Alternatives Finder
+     - Uses location data to suggest nearby stores
+     - Displays lower-priced alternatives for similar products
+     - Integrates map services for convenience
+3. Wishlist Price Monitoring
+     - Tracks items users want to buy
+     - Alerts users when cheaper or similar products are available
+     - Uses AI to identify comparable products
+
+
 ### Contributing
 
 
@@ -32,7 +46,7 @@ Describe how to use your project, including code examples or screenshots.
 
 
 
-### Features
+
 
 
 
