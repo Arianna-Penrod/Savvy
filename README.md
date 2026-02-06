@@ -36,7 +36,9 @@ Describe how to use your project, including code examples or screenshots.
      - Tracks items users want to buy
      - Alerts users when cheaper or similar products are available
      - Uses AI to identify comparable products
-
+4. AI Personalization
+     - Memorizes users patterns
+     - Provides personality for engagement
 
 ### Contributing
 
