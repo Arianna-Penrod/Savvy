@@ -17,7 +17,7 @@ Include code snippets if necessary.
 1. Clone the repository onto your device:
 
 2. Install dependencies:
-
+- 
 
 ### Usage
 Describe how to use your project, including code examples or screenshots.
