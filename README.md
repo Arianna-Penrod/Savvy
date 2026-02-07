@@ -14,10 +14,13 @@ A IOS and Android app that helps users save money by tracking spending habits an
 ### Installation
 Explain how users can install or use your project locally on their computers.
 Include code snippets if necessary.
-1. Clone the repository onto your device:
 
+1. Clone the repository onto your device:
+- open the terminal and change do the directory you want to have Savvy in
+- once you are in the directory, paste the following command:
+      git clone https://github.com/Arianna-Penrod/Savvy.git
 2. Install dependencies:
-- 
+
 
 ### Usage
 Describe how to use your project, including code examples or screenshots.
@@ -40,19 +43,23 @@ Describe how to use your project, including code examples or screenshots.
      - Memorizes users patterns
      - Provides personality for engagement
 
-### Contributing
 
+### Contributing
+- Arianna Penrod
+- Sadita Sadat
+- Carlyssa Cook
+- Sarah Haffener
+- Hima Mandla
+- Madi Wallace
 
 
 ### License
-
-
-
-
-
+MIT license
 
 
 ### Documentation
 
 React Native explanation:
 [[https://www.youtube.com/watch?v=gvkqT_Uoahw]]
+
+
