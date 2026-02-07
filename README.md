@@ -62,4 +62,10 @@ MIT license
 React Native explanation:
 [[https://www.youtube.com/watch?v=gvkqT_Uoahw]]
 
-
+- Git commands:
+git diff
+git status
+git add -A
+git commit -m "I am the message title" - m "I am the message body"
+git pull origin main
+git push origin main
