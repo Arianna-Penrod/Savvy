@@ -9,7 +9,7 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <Text>This will be the landing page of our app!</Text>
+      <Text>This will be the landing page of our app! Yipee</Text>
     </View>
   );
 }
