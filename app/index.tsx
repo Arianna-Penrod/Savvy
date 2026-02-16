@@ -9,7 +9,11 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <Text>This will be the landing page of our app! Yipee</Text>
+      <Text>This will be the landing page of our app! Yippee</Text>
+      <View style={{ height: 20 }} />
+      <Text>
+        This can be the page that shows the user a list of items near them?
+      </Text>
     </View>
   );
 }
