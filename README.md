@@ -49,10 +49,6 @@ Use one package manager npm.
 npm install
 ```
 
-### 3) Create your local environment file 
-
-If we use environment variables, copy the example:
-
 ---
 
 ## Run the App (Expo)
