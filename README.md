@@ -154,11 +154,11 @@ git merge origin/main
 
 ## Project Structure
 
-app/ — main app code
-components/ — reusable UI components
-assets/ — images, icons
-types/ — TypeScript types (we will add this soon)
-utils/ — helpers (we will add this soon too)
+- app/ — main app code
+- components/ — reusable UI components
+- assets/ — images, icons
+- types/ — TypeScript types (we will add this soon)
+- utils/ — helpers (we will add this soon too)
 
 ---
 ## Troubleshooting
