@@ -130,16 +130,6 @@ Don’t commit .env files or keys
 
 Don’t edit files you didn’t mean to touch (especially lockfiles) unless required
 
-About lockfiles
-
-We commit exactly one lockfile:
-
-If using npm: commit package-lock.json
-
-If using yarn: commit yarn.lock
-
-Everyone should use the same tool to avoid dependency/version conflicts.
-
 ---
 
 ## Branching & Pull Requests
