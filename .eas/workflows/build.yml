@@ -11,8 +11,7 @@ jobs:
     type: build
     params:
       platform: android
-  build_web:
-    name: Build Web App
-    type: build
-    params:
-      platform: web
+  deploy:
+    type: deploy
+    name: Deploy
+    environment: production
