@@ -29,6 +29,7 @@ Install these **before** cloning the repo:
 - **npm** (comes with Node)
 - **Expo Go** on your phone (App Store / Google Play), OR an emulator (optional)
   https://expo.dev/go
+- **EAS CLI*** https://docs.expo.dev/eas/hosting/get-started/
 
 > We should **never** commit `node_modules/`. Everyone installs dependencies locally.
 
