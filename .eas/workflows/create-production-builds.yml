@@ -1,0 +1,18 @@
+name: Create Production Builds
+
+
+on:
+  push:
+    branches: ['main']
+
+  jobs:
+    build_android:
+      type: build
+      params:
+        platform: android
+    deploy_web:
+      type: deploy
+      params:
+        alias: string # optional
+        prod: boolean # optional
+    # we can add ios after we configure the build correctly
