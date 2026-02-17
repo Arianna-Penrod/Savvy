@@ -6,12 +6,12 @@ on:
       - main
 
 jobs:
-  build_android:
+  build_android: # Andriod build
     name: Build Android App
     type: build
     params:
       platform: android
-  deploy:
+  deploy: # web deployment
     type: deploy
     name: Deploy
     environment: production
