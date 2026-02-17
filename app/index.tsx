@@ -13,7 +13,7 @@ export default function Index() {
       <Text>Will this work idkkkk</Text>
       <View style={{ height: 20 }} />
       <Text>
-        This can be the page that shows the user a list of items near them? Hiiighhjgjgj
+        This can be the page that shows the user a list of items near them? 
       </Text>
     </View>
   );
