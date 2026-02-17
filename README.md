@@ -40,7 +40,6 @@ Install these **before** cloning the repo:
 ### 1) Clone the repo
 ```bash
 git clone https://github.com/Arianna-Penrod/Savvy.git
-cd Savvy
 ```
 
 ### 2) Install dependencies
