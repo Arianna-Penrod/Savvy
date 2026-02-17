@@ -146,4 +146,5 @@ vite.config.ts.timestamp-*
 
 # put in here bc it says so
 expo-env.d.ts
-.gitignore
+.expo
+
