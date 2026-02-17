@@ -47,7 +47,7 @@ cd Savvy
 
 Use one package manager npm.
 ```bash
-npm install
+npm install --global eas-cli
 ```
 
 ---
