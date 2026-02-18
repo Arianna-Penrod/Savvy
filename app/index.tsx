@@ -5,9 +5,6 @@ import * as Location from "expo-location";
 
 const EXPO_PUBLIC_GOOGLE_MAPS_KEY= "AIzaSyCnjvFaIkRg6peTExxw3ARtnD61LRFcMP4";
 
-<<<<<<< HEAD
-async function getNearbyStores(lat: number, lng: number) {
-=======
 const GOOGLE_API_KEY = process.env.EXPO_PUBLIC_GOOGLE_MAPS_KEY;
 
 export default function Index() {
@@ -103,7 +100,6 @@ const styles = StyleSheet.create({
 
 /*
 async function getNearbyStores(lat, lng) {
->>>>>>> 84554fbd (worked on Google API formating)
   const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json
   ?location=${lat},${lng}
   &radius=2000
