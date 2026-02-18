@@ -27,8 +27,8 @@ Install these **before** cloning the repo:
   - Check: `git --version`
   - 
   - Check that your GitHub is connected:
-  `git config --global user.name
-   git config --global user.email`
+  `git config --global user.name`
+   AND `git config --global user.email`
 - **Node.js (LTS recommended)**
   https://nodejs.org/en/download
   - Check: `node -v`
