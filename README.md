@@ -23,7 +23,9 @@ Install these **before** cloning the repo:
 
 - **Git**
   https://github.com/git-guides/install-git
+  
   - Check: `git --version`
+  - 
   - Check that your GitHub is connected:
   `git config --global user.name
    git config --global user.email`
