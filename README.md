@@ -23,19 +23,19 @@ Install these **before** cloning the repo:
 
 - **Git**
   https://github.com/git-guides/install-git
-  Check: `git --version`
-  Check that your GitHub is connected:
+  - Check: `git --version`
+  - Check that your GitHub is connected:
   `git config --global user.name
    git config --global user.email`
 - **Node.js (LTS recommended)**
   https://nodejs.org/en/download
-  Check: `node -v`
+  - Check: `node -v`
 - **npm** (comes with Node)
-- Check: `npm --version`
+  - Check: `npm --version`
 - **Expo Go** on your phone (App Store / Google Play), OR an emulator (optional)
   https://expo.dev/go
-  Install: `npx expo install`
-  Check: `npx expo --version`
+  - Install: `npx expo install`
+  - Check: `npx expo --version`
 
 > We should **never** commit `node_modules/`. Everyone installs dependencies locally.
 
