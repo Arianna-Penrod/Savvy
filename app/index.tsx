@@ -1,6 +1,6 @@
 import { Text, View } from "react-native";
 
-const GOOGLE_API_KEY = AIzaSyCnjvFaIkRg6peTExxw3ARtnD61LRFcMP4;
+const GOOGLE_API_KEY = "AIzaSyCnjvFaIkRg6peTExxw3ARtnD61LRFcMP4";
 
 async function getNearbyStores(lat, lng) {
   const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json
