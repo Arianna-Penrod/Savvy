@@ -23,13 +23,19 @@ Install these **before** cloning the repo:
 
 - **Git**
   https://github.com/git-guides/install-git
+  Check: `git --version`
+  Check that your GitHub is connected:
+  `git config --global user.name
+   git config --global user.email`
 - **Node.js (LTS recommended)**
   https://nodejs.org/en/download
   Check: `node -v`
 - **npm** (comes with Node)
+- Check: `npm --version`
 - **Expo Go** on your phone (App Store / Google Play), OR an emulator (optional)
   https://expo.dev/go
-- **EAS CLI*** https://docs.expo.dev/eas/hosting/get-started/
+  Install: `npx expo install`
+  Check: `npx expo --version`
 
 > We should **never** commit `node_modules/`. Everyone installs dependencies locally.
 
@@ -42,11 +48,11 @@ Install these **before** cloning the repo:
 git clone https://github.com/Arianna-Penrod/Savvy.git
 ```
 
-### 2) Install dependencies
+### 2) Check that dependencies are installed
 
 Use one package manager npm.
 ```bash
-npm install --global eas-cli
+npm install
 ```
 
 ---
@@ -60,12 +66,7 @@ npx expo start
 
 Then choose one:
 
-(I recommend using the Expo Go app on your phone!)
-Scan the QR code with Expo Go app
-
-Press i to run iOS simulator (Mac only)
-
-Press a to run Android emulator
+Press w to open the web app
 
 ---
 
@@ -76,15 +77,15 @@ Golden rule: ***Always*** pull before you start coding please!
 git pull origin main
 ```
 
-Our workflow:
+### Create A Branch & Pull
 
-1) Update main locally:
+1) Update your local main:
 ```bash
 git checkout main
 git pull origin main
 ```
 
-2) Create a new branch for your task:
+2) Create a new branch:
 ```bash
 git checkout -b feature/short-description
 ```
@@ -98,12 +99,50 @@ git diff
 4) Stage & commit your local changes to the repo:
 ```bash
 git add -A
-git commit -m "Short summary of change"
+git commit -m "Short summary of change" -m "Longer summary if needed"
 ```
 
 5) Push your branch:
 ```bash
-git push -u origin feature/short-description
+git push
+```
+
+### Push and Pull
+
+```bash
+git pull
+```
+
+```bash
+git add -A
+```
+
+```bash
+git commit -m "Short summary of change" -m "Longer summary if needed"
+```
+
+```bash
+git push
+```
+
+### Helpful commands
+
+To pull
+```bash
+git push
+```
+```bash
+git branch
+```
+
+To switch to a different branch
+```bash
+git checkount branch-name
+```
+
+To compare local repo to remote repo
+```bash
+git status
 ```
 
 ---
@@ -126,9 +165,9 @@ Run lint before pushing (or before committing if hooks are installed, we will im
 
 Do not commit node_modules/
 
-Don’t commit .env files or keys
+Don’t commit .env files or keys plz
 
-Don’t edit files you didn’t mean to touch (especially lockfiles) unless required
+Try not to edit files not necessary to development mean to touch (especially lockfiles) unless required and communicated within the team
 
 ---
 
@@ -136,7 +175,7 @@ Don’t edit files you didn’t mean to touch (especially lockfiles) unless requ
 
 Branch names: feature/..., fix/..., chore/...
 
-PRs should:
+Pull requests should:
 - Describe what changed
 - Include screenshots/video if UI changed
 - Reference the issue/task if applicable
@@ -148,7 +187,7 @@ git checkout feature/your-branch
 git fetch origin
 git merge origin/main
 ```
-- Resolve conflicts, commit, push again.
+- Resolve conflicts, commit, push again. (We will learn this together as a team 😄)
 
 ---
 
