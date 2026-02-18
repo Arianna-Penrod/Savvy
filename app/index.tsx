@@ -1,5 +1,19 @@
 import { Text, View } from "react-native";
 
+const GOOGLE_API_KEY = AIzaSyCnjvFaIkRg6peTExxw3ARtnD61LRFcMP4;
+
+async function getNearbyStores(lat, lng) {
+  const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json
+  ?location=${lat},${lng}
+  &radius=2000
+  &type=supermarket
+  &key=${GOOGLE_API_KEY}`;
+
+  const res = await fetch(url);
+  const data = await res.json();
+  return data.results;
+}
+
 export default function Index() {
   return (
     <View
@@ -17,4 +31,5 @@ export default function Index() {
       </Text>
     </View>
   );
+
 }
