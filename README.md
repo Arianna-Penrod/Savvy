@@ -243,6 +243,8 @@ git push origin main
 
 - Madi Wallace
 
+- Vesa Hoxha
+
 --- 
 ## License
 
