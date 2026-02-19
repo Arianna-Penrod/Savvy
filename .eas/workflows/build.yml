@@ -6,11 +6,6 @@ on:
       - main
 
 jobs:
-  build_android: # Andriod build
-    name: Build Android App
-    type: build
-    params:
-      platform: android
   deploy: # web deployment
     type: deploy
     name: Deploy
