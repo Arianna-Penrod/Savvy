@@ -201,6 +201,10 @@ git merge origin/main
 - types/ — TypeScript types (we will add this soon)
 - utils/ — helpers (we will add this soon too)
 
+FLOWCHART
+![App Layout](flowchart.png)
+
+
 ---
 ## Troubleshooting
 
