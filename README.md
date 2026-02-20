@@ -202,6 +202,7 @@ git merge origin/main
 - utils/ — helpers (we will add this soon too)
 
 FLOWCHART
+
 ![App Layout](flowchart.png)
 
 
