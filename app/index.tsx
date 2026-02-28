@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { View, StyleSheet, Text } from "react-native";
-import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
+import StoreMap from "../components/StoreMap.web";
 
-const EXPO_PUBLIC_GOOGLE_MAPS_KEY= "AIzaSyCnjvFaIkRg6peTExxw3ARtnD61LRFcMP4";
+const EXPO_PUBLIC_GOOGLE_MAPS_KEY = "AIzaSyCnjvFaIkRg6peTExxw3ARtnD61LRFcMP4";
 
 const GOOGLE_API_KEY = process.env.EXPO_PUBLIC_GOOGLE_MAPS_KEY;
 
@@ -18,14 +18,12 @@ export default function Index() {
 
   const getUserLocation = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
-
     if (status !== "granted") {
       setErrorMsg("Permission to access location was denied");
       return;
     }
 
     let location = await Location.getCurrentPositionAsync({});
-
     const userRegion = {
       latitude: location.coords.latitude,
       longitude: location.coords.longitude,
@@ -42,7 +40,6 @@ export default function Index() {
       const response = await fetch(
         `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=2000&type=supermarket&key=${GOOGLE_API_KEY}`
       );
-
       const data = await response.json();
       setStores(data.results || []);
     } catch (error) {
@@ -66,69 +63,10 @@ export default function Index() {
     );
   }
 
-  return (
-    <MapView style={styles.map} region={region}>
-      {/* User Marker */}
-      <Marker coordinate={region} title="You are here" pinColor="blue" />
-
-      {/* Store Markers */}
-      {stores.map((store, index) => (
-        <Marker
-          key={index}
-          coordinate={{
-            latitude: store.geometry.location.lat,
-            longitude: store.geometry.location.lng,
-          }}
-          title={store.name}
-        />
-      ))}
-    </MapView>
-  );
+  // On native: shows real map. On web: shows fallback component.
+  return <StoreMap region={region} stores={stores} />;
 }
 
 const styles = StyleSheet.create({
-  map: {
-    flex: 1,
-  },
-  center: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
+  center: { flex: 1, justifyContent: "center", alignItems: "center" },
 });
-
-
-/*
-async function getNearbyStores(lat, lng) {
-  const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json
-  ?location=${lat},${lng}
-  &radius=2000
-  &type=supermarket
-  &key=${GOOGLE_API_KEY}`;
-
-  const res = await fetch(url);
-  const data = await res.json();
-  return data.results;
-}
-
-export default function Index() {
-  return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>This will be the landing page of our app! Yippee</Text>
-      <Text>Will this work idkkkk</Text>
-      <View style={{ height: 20 }} />
-      <Text>
-        This can be the page that shows the user a list of items near them?
-      </Text>
-    </View>
-  );
-
-}
-  */
-
