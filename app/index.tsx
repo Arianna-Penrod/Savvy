@@ -34,7 +34,7 @@ export default function Index() {
   const handleLogin = () => {
     // Temporary fake login logic
     // Replace this later with Firebase, Supabase, your backend, etc.
-    if (email.trim() === "test@test.com" && password === "1234") {
+    if (email.trim() === "test@test.com" && password === "12345") {
       setLoginError("");
       setIsLoggedIn(true);
     } else {
