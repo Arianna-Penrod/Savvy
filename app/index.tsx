@@ -7,6 +7,8 @@ const EXPO_PUBLIC_GOOGLE_MAPS_KEY = "AIzaSyCnjvFaIkRg6peTExxw3ARtnD61LRFcMP4";
 
 const GOOGLE_API_KEY = process.env.EXPO_PUBLIC_GOOGLE_MAPS_KEY;
 
+
+
 export default function Index() {
   const [region, setRegion] = useState<any>(null);
   const [stores, setStores] = useState<any[]>([]);
@@ -19,7 +21,7 @@ export default function Index() {
   const getUserLocation = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== "granted") {
-      setErrorMsg("Permission to access location was denied");
+      setErrorMsg("Permission to access location was ");
       return;
     }
 
