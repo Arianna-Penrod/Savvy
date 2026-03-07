@@ -9,6 +9,8 @@ import {
 } from "react-native";
 import * as Location from "expo-location";
 import StoreMap from "../components/StoreMap.web";
+import { findCheapest } from "@/utils/priceComparison";
+
 
 const EXPO_PUBLIC_GOOGLE_MAPS_KEY = "AIzaSyCnjvFaIkRg6peTExxw3ARtnD61LRFcMP4";
 
