@@ -27,6 +27,10 @@ export default function Index() {
   const [stores, setStores] = useState<any[]>([]);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
+  // PRODUCT SEARCH STATES
+  const [searchProduct, setSearchProduct] = useState("");
+  const [cheapestProduct, setCheapestProduct] = useState<any>(null);
+
   useEffect(() => {
     if (isLoggedIn) {
       getUserLocation();
