@@ -199,10 +199,12 @@ export default function Index() {
       </View>
 
       {/* MAP */}
+      <View style={{ flex: 1 }}>
       <StoreMap
         region={region}
         stores={stores}
       />
+      </View>
 
     </View>
   );
