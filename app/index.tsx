@@ -9,6 +9,8 @@ import {
 } from "react-native";
 import * as Location from "expo-location";
 import StoreMap from "../components/StoreMap.web";
+import { findCheapest } from "@/utils/priceComparison";
+
 
 const EXPO_PUBLIC_GOOGLE_MAPS_KEY = "AIzaSyCnjvFaIkRg6peTExxw3ARtnD61LRFcMP4";
 
@@ -24,6 +26,10 @@ export default function Index() {
   const [region, setRegion] = useState<any>(null);
   const [stores, setStores] = useState<any[]>([]);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  // PRODUCT SEARCH STATES
+  const [searchProduct, setSearchProduct] = useState("");
+  const [cheapestProduct, setCheapestProduct] = useState<any>(null);
 
   useEffect(() => {
     if (isLoggedIn) {
