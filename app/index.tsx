@@ -177,6 +177,13 @@ const styles = StyleSheet.create({
     marginBottom: 24,
     textAlign: "center",
   },
+
+  searchContainer: {
+    padding: 16,
+    backgroundColor: "#fff",
+  },
+
+  
   input: {
     borderWidth: 1,
     borderColor: "#ccc",
@@ -195,6 +202,19 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
   },
+
+  resultBox: {
+    marginTop: 10,
+    padding: 10,
+    backgroundColor: "#E8F4FF",
+    borderRadius: 8,
+  },
+
+  resultText: {
+    fontSize: 16,
+    fontWeight: "500",
+  },
+
   error: {
     color: "red",
     marginBottom: 10,
