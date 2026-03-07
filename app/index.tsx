@@ -5,11 +5,14 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  Platform
 } from "react-native";
 import * as Location from "expo-location";
 import StoreMap from "../components/StoreMap.web";
 
-const GOOGLE_API_KEY = process.env.EXPO_PUBLIC_GOOGLE_MAPS_KEY;
+const EXPO_PUBLIC_GOOGLE_MAPS_KEY = "AIzaSyCnjvFaIkRg6peTExxw3ARtnD61LRFcMP4";
+
+const GOOGLE_API_KEY = EXPO_PUBLIC_GOOGLE_MAPS_KEY;
 
 export default function Index() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -40,6 +43,7 @@ export default function Index() {
   };
 
   const getUserLocation = async () => {
+    try{
     let { status } = await Location.requestForegroundPermissionsAsync();
 
     if (status !== "granted") {
@@ -57,9 +61,29 @@ export default function Index() {
 
     setRegion(userRegion);
     fetchNearbyStores(userRegion.latitude, userRegion.longitude);
+  }
+  catch (err) {
+    console.log(err);
+    setErrorMsg("Failed to get location");
+  }
   };
 
   const fetchNearbyStores = async (lat: number, lng: number) => {
+   // Web fallback because Google blocks browser requests
+    if (Platform.OS === "web") {
+      setStores([
+        {
+          name: "Demo Walmart",
+          geometry: { location: { lat: lat + 0.002, lng: lng + 0.002 } },
+        },
+        {
+          name: "Demo Target",
+          geometry: { location: { lat: lat - 0.002, lng: lng - 0.002 } },
+        },
+      ]);
+      return;
+    }
+   
     try {
       const response = await fetch(
         `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=2000&type=supermarket&key=${GOOGLE_API_KEY}`
