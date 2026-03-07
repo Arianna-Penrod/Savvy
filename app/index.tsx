@@ -156,7 +156,56 @@ export default function Index() {
   }
 
   // MAP SCREEN
-  return <StoreMap region={region} stores={stores} />;
+  //return <StoreMap region={region} stores={stores} />;
+  // MAIN SCREEN
+  return (
+    <View style={{ flex: 1 }}>
+
+      {/* SEARCH BAR */}
+      <View style={styles.searchContainer}>
+
+        <TextInput
+          style={styles.input}
+          placeholder="Search product (Milk, Eggs, Bread)"
+          value={searchProduct}
+          onChangeText={setSearchProduct}
+        />
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={handleSearch}
+        >
+          <Text style={styles.buttonText}>
+            Find Cheapest
+          </Text>
+        </TouchableOpacity>
+
+        {cheapestProduct && (
+
+          <View style={styles.resultBox}>
+
+            <Text style={styles.resultText}>
+              Cheapest Store: {cheapestProduct.store}
+            </Text>
+
+            <Text style={styles.resultText}>
+              Price: ${cheapestProduct.price}
+            </Text>
+
+          </View>
+
+        )}
+
+      </View>
+
+      {/* MAP */}
+      <StoreMap
+        region={region}
+        stores={stores}
+      />
+
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -183,7 +232,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
 
-  
+
   input: {
     borderWidth: 1,
     borderColor: "#ccc",
