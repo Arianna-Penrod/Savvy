@@ -33,14 +33,14 @@ jobs:
       - name: Build project
         run: npm run build --if-present
 
-        deploy:
-        needs: test-and-build
-        runs-on: ubuntu-latest
-        if: github.ref == 'refs/heads/main'
-
-        steps:
-        - name: Checkout repository
-          uses: actions/checkout@v4
-
-        - name: Deployment placeholder
-          run: echo "Deployment step would run here after tests pass."
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+  
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Deployment placeholder
+      run: echo "Deployment step would run here after tests pass."
