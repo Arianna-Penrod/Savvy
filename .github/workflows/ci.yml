@@ -2,9 +2,9 @@ name: CI Pipeline
 
 on:
   push:
-    branches: [main]
+    branches: [main, test-ci]
   pull_request:
-    branches: [main]
+    branches: [main, test-ci]
 
 jobs:
   build:
@@ -32,7 +32,3 @@ jobs:
       # 5️⃣ Check that the project builds
       - name: Build project
         run: npm run build --if-present
-
-        
-        
-      
