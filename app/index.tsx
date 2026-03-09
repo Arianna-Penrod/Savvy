@@ -110,7 +110,7 @@ export default function Index() {
   if (!isLoggedIn) {
     return (
       <View style={styles.loginContainer}>
-        <Text style={styles.title}>Login</Text>
+        <Text style={styles.title}>Login?</Text>
 
         <TextInput
           style={styles.input}
