@@ -54,33 +54,33 @@ export default function Index() {
   };
 
   const getUserLocation = async () => {
-    try{
-    let { status } = await Location.requestForegroundPermissionsAsync();
+    try {
+      let { status } = await Location.requestForegroundPermissionsAsync();
 
-    if (status !== "granted") {
-      setErrorMsg("Permission to access location was denied");
-      return;
+      if (status !== "granted") {
+        setErrorMsg("Permission to access location was denied");
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      const userRegion = {
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+        latitudeDelta: 0.01,
+        longitudeDelta: 0.01,
+      };
+
+      setRegion(userRegion);
+      fetchNearbyStores(userRegion.latitude, userRegion.longitude);
     }
-
-    let location = await Location.getCurrentPositionAsync({});
-    const userRegion = {
-      latitude: location.coords.latitude,
-      longitude: location.coords.longitude,
-      latitudeDelta: 0.01,
-      longitudeDelta: 0.01,
-    };
-
-    setRegion(userRegion);
-    fetchNearbyStores(userRegion.latitude, userRegion.longitude);
-  }
-  catch (err) {
-    console.log(err);
-    setErrorMsg("Failed to get location");
-  }
+    catch (err) {
+      console.log(err);
+      setErrorMsg("Failed to get location");
+    }
   };
 
   const fetchNearbyStores = async (lat: number, lng: number) => {
-   // Web fallback because Google blocks browser requests
+    // Web fallback because Google blocks browser requests
     if (Platform.OS === "web") {
       setStores([
         {
@@ -94,7 +94,7 @@ export default function Index() {
       ]);
       return;
     }
-   
+
     try {
       const response = await fetch(
         `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=2000&type=supermarket&key=${GOOGLE_API_KEY}`
@@ -200,10 +200,10 @@ export default function Index() {
 
       {/* MAP */}
       <View style={{ flex: 1 }}>
-      <StoreMap
-        region={region}
-        stores={stores}
-      />
+        <StoreMap
+          region={region}
+          stores={stores}
+        />
       </View>
 
     </View>
@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     paddingHorizontal: 24,
-    backgroundColor: "#fff",
+    backgroundColor: "#ffA",
   },
   title: {
     fontSize: 28,
