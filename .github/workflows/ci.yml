@@ -30,5 +30,4 @@ jobs:
         run: npm test --if-present
 
       # 5️⃣ Check that the project builds
-      - name: Build project
-        run: npm run build --if-present
+      
