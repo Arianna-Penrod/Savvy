@@ -30,4 +30,5 @@ jobs:
         run: npm test --if-present
 
       # 5️⃣ Check that the project builds
-      
+      - name: Build
+        run: eas build --plaform web
