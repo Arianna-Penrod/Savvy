@@ -18,6 +18,7 @@ npx jest __test__/searchProduct.tsx
 ```
 ## Unit Test Summary
 * index.text.tsx by Arianna Penrod
+
   test: login username only contains characters
   if (!containsNumber(username) && !containsSpecialChar(username)):
   test pass
