@@ -56,3 +56,8 @@ npx jest __test__/searchProductEmpty.tsx
     - Confirms successful login after correcting credentials
     - Ensures the UI updates correctly (login screen disappears)
 
+
+* testProductRecs.tsx by Sarah Haffener
+    - Recommend products based on user's purchase history
+    - Expected output: returns popular products if no purchase history exists
+
