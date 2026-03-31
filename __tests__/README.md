@@ -45,9 +45,9 @@ npx jest __test__/searchProductEmpty.tsx
  
 * searchProductEmpty.tsx by Himaghna Mandla
   - Tests how findCheapest handles empty or invalid input:
-   - Empty String ("")
-   - Product not in database ("Dodo feathers")
-   - Null or Undefined
+     - Empty String ("")
+     - Product not in database ("Dodo feathers")
+     - Null or Undefined
   - Expected behavior: returns null
  
 
