@@ -44,10 +44,10 @@ npx jest __test__/searchProductEmpty.tsx
   - ensure it returns the cheapest store given a product
  
 * searchProductEmpty.tsx by Himaghna Mandla
-  Tests how findCheapest handles empty or invalid input:
+  - Tests how findCheapest handles empty or invalid input:
    - Empty String ("")
    - Product not in database ("Dodo feathers")
    - Null or Undefined
-  Expected behavior: returns null
+  - Expected behavior: returns null
  
 
