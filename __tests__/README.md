@@ -48,6 +48,6 @@ npx jest __test__/searchProductEmpty.tsx
     - Empty String ("")
     - Product not in database ("Dodo feathers")
     - Null or Undefined
-  - Expected behavior: returns null
+  - Expected behavior: returns error message
  
 
