@@ -50,9 +50,9 @@ npx jest __test__/searchProductEmpty.tsx
     - Null or Undefined
   - Expected behavior: returns error message
 
-  * index.loginflow.test.tsx by Carlyssa Cook
-  - Simulates a real user login flow by entering incorrect credentials, verifying the error message, then correcting the password and successfully logging in.
-  - Verifies that an error message appears for invalid login
-  - Confirms successful login after correcting credentials
-  - Ensures the UI updates correctly (login screen disappears)
+* index.loginflow.test.tsx by Carlyssa Cook
+    - Simulates a real user login flow by entering incorrect credentials, verifying the error message, then correcting the password and successfully logging in.
+    - Verifies that an error message appears for invalid login
+    - Confirms successful login after correcting credentials
+    - Ensures the UI updates correctly (login screen disappears)
 
