@@ -11,7 +11,7 @@ describe("findCheapest empty/invalid input tests", () => {
   });
 
   it("returns null for a product not in the database", () => {
-    const result = findCheapest("Unicorn Meat"); // nonexistent product
+    const result = findCheapest("Dodo feathers"); // nonexistent product
     expect(result).toBeNull();
   });
 
