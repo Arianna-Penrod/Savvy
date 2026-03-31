@@ -24,6 +24,10 @@ npx jest __test__/searchProductEmpty.tsx
 ```bash
 npx jest __test__/index.loginflow.test.tsx
 ```
+### Run loginCaseSensitivity.tsx by Madi Wallace
+```bash
+npx jest __test__/loginCaseSensitivity.tsx
+```
 
 ## Unit Test Summary
 * index.text.tsx by Arianna Penrod
@@ -65,4 +69,9 @@ npx jest __test__/index.loginflow.test.tsx
 * testProductRecs.tsx by Sarah Haffener
     - Recommend products based on user's purchase history
     - Expected output: returns popular products if no purchase history exists
+ 
+* loginCaseSensitivity.tsx by Madi Wallace
+    - These tests validate that the login system correctly enforces case-sensitive authentication
+    - The username and password must exactly match stored credentials, including uppercase and lowercase letters
+    - Example: correct username: MadiUser, wrong case: madiuser --> should fail --> exact case should pass
 
