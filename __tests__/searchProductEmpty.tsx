@@ -1,9 +1,7 @@
 import { describe, it, expect } from "@jest/globals";
 import { findCheapest } from "../utils/priceComparison";
 
-/* Tests to make sure findCheapest handles cases where the product input is empty
-  or doesn’t exist.
-*/
+// Tests to make sure findCheapest handles cases where the product input is empty or doesn’t exist.
 
 describe("findCheapest empty/invalid input tests", () => {
 
