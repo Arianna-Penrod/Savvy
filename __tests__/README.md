@@ -20,6 +20,11 @@ npx jest __test__/searchProduct.tsx
 ```bash
 npx jest __test__/searchProductEmpty.tsx
 ```
+### Run index.loginflow.test.tsx by Carlyssa Cook
+```bash
+npx jest __test__/index.loginflow.test.tsx.tsx
+```
+
 ## Unit Test Summary
 * index.text.tsx by Arianna Penrod
 
