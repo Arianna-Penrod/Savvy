@@ -43,11 +43,11 @@ npx jest __test__/searchProductEmpty.tsx
   - validates the core price comparison logic used in the app
   - ensure it returns the cheapest store given a product
  
-* searchProductEmpty.tsx by Himaghna Mandla <br>
-  Tests how findCheapest handles empty or invalid input:
+* searchProductEmpty.tsx by Himaghna Mandla
+  - Tests how findCheapest handles empty or invalid input:
    - Empty String ("")
    - Product not in database ("Dodo feathers")
-   - Null or Undefined <br>
-  Expected behavior: returns null
+   - Null or Undefined
+  - Expected behavior: returns null
  
 
