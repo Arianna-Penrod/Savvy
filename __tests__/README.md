@@ -16,6 +16,10 @@ npx jest __test__/index.text.tsx
 ```bash
 npx jest __test__/searchProduct.tsx
 ```
+### Run searchProductEmpty.tsx by Himaghna Mandla
+```bash
+npx jest __test__/searchProductEmpty.tsx
+```
 ## Unit Test Summary
 * index.text.tsx by Arianna Penrod
 
@@ -38,5 +42,12 @@ npx jest __test__/searchProduct.tsx
 * searchProduct.tsx by Sadita Sadat
   - validates the core price comparison logic used in the app
   - ensure it returns the cheapest store given a product
+ 
+* searchProductEmpty.tsx by Himaghna Mandla
+  Tests how findCheapest handles empty or invalid input:
+   - Empty String ("")
+   - Product not in database ("Dodo feathers")
+   - Null or Undefined
+  Expected behavior: returns null
  
 
