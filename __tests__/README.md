@@ -1,6 +1,6 @@
 # Unit Tests
 
-This shows all the commands to run unit tests and install dependencies
+This README shows all the commands to run unit tests and install dependencies
 
 ## Install dependencies
 ```bash
