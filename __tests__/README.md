@@ -8,7 +8,7 @@ npm install
 ```
 
 ## Running Unit Tests
-### Run one test file:
+### Run searchProduct.tsx by Sadita Sadat:
 ```bash
 npx jest __test__/searchProduct.tsx
 ```
