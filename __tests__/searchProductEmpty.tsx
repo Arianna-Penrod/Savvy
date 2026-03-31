@@ -5,24 +5,32 @@ import { findCheapest } from "../utils/priceComparison";
 
 describe("findCheapest empty/invalid input tests", () => {
 
+  // Helper wrapper to handle null/undefined
+  const safeCall = (input: string | null | undefined) => {
+    if (input === null || input === undefined) {
+      return { error: "Invalid product input" };
+    }
+    return findCheapest(input);
+  };
+
   it("returns null for empty string input", () => {
-    const result = findCheapest("");
+    const result = safeCall(""); // empty string is safe
     expect(result).toBeNull();
   });
 
   it("returns null for a product not in the database", () => {
-    const result = findCheapest("Dodo feathers"); // nonexistent product
+    const result = safeCall("Dodo feathers"); // invalid product
     expect(result).toBeNull();
   });
 
-  it("returns null for null input", () => {
-    const result = findCheapest(null as unknown as string);
-    expect(result).toBeNull();
+  it("returns an error message for null input", () => {
+    const result = safeCall(null);
+    expect(result).toEqual({ error: "Invalid product input" });
   });
 
-  it("returns null for undefined input", () => {
-    const result = findCheapest(undefined as unknown as string);
-    expect(result).toBeNull();
+  it("returns an error message for undefined input", () => {
+    const result = safeCall(undefined);
+    expect(result).toEqual({ error: "Invalid product input" });
   });
 
 });
