@@ -32,6 +32,11 @@ npx jest __test__/loginCaseSensitivity.tsx
 ```bash
 npx jest_test_/testProductRecs.tsx
 ```
+### Run editColor.tsx by Vesa Hoxha
+```bash
+npx jest_test_/editColor.tsx
+```
+
 
 ## Unit Test Summary
 * index.text.tsx by Arianna Penrod
