@@ -28,6 +28,10 @@ npx jest __test__/index.loginflow.test.tsx
 ```bash
 npx jest __test__/loginCaseSensitivity.tsx
 ```
+### Run testProductRecs.tsx by Sarah Haffener
+```bash
+npx jest_test_/testProductRecs.tsx
+```
 
 ## Unit Test Summary
 * index.text.tsx by Arianna Penrod
