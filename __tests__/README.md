@@ -83,4 +83,7 @@ npx jest_test_/editColor.tsx
     - These tests validate that the login system correctly enforces case-sensitive authentication
     - The username and password must exactly match stored credentials, including uppercase and lowercase letters
     - Example: correct username: MadiUser, wrong case: madiuser --> should fail --> exact case should pass
+ 
+* editColor.tsx by Vesa Hoxha
+  - test the color of login screen
 
