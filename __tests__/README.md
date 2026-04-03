@@ -10,7 +10,7 @@ npm install
 ## Running Unit Tests
 ### Run index.text.tsx by Arianna Penrod
 ```bash
-npx jest __tests__/index.text.tsx
+npx jest __tests__/index.test.tsx
 ```
 ### Run searchProduct.tsx by Sadita Sadat:
 ```bash
