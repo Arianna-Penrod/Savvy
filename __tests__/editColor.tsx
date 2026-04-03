@@ -3,7 +3,7 @@ import { render } from "@testing-library/react-native";
 import { describe, it, expect, jest } from "@jest/globals";
 import Index from "../app/index";
 
-// Mock expo-location
+// Mock dependencies
 jest.mock("expo-location", () => ({
   requestForegroundPermissionsAsync: jest.fn(async () => ({ status: "granted" })),
   getCurrentPositionAsync: jest.fn(async () => ({
@@ -11,39 +11,35 @@ jest.mock("expo-location", () => ({
   })),
 }));
 
-// Mock StoreMap
 jest.mock("../components/StoreMap.web", () => {
   const React = require("react");
   const { Text } = require("react-native");
-  return function MockStoreMap() { return <Text>Mock Store Map</Text>; };
-});
+  return function MockStoreMap() {
+    return <Text>Mock Store Map</Text>;
+  };
+}));
 
-// Mock priceComparison
-jest.mock("@/utils/priceComparison", () => ({ findCheapest: jest.fn() }));
+jest.mock("@/utils/priceComparison", () => ({
+  findCheapest: jest.fn(),
+}));
 
-/*
-  This test validates the login page UI.
-  Specifically, it ensures the Sign In button uses the correct background color.
-*/
-
-describe("Login page color test", () => {
-  it("checks that the Sign In button has the correct background color", async () => {
+// Login Button Color Test
+describe("Login page Sign In button color test", () => {
+  it("checks that the Sign In button has the correct background color", () => {
     const { getByText } = render(<Index />);
 
-    // Find the Sign In text
-    const buttonText = await getByText("Sign In");
+    // Find the "Sign In" text
+    const signInText = getByText("Sign In");
 
-    // Access parent TouchableOpacity style
-    const buttonStyle = buttonText?.parent?.props?.style;
+    // Its parent is the TouchableOpacity
+    const button = signInText.parent;
 
-    // In React Native, style can be an array — flatten if needed
-    let flattenedStyle = {};
-    if (Array.isArray(buttonStyle)) {
-      flattenedStyle = Object.assign({}, ...buttonStyle);
-    } else {
-      flattenedStyle = buttonStyle || {};
-    }
+    // Flatten the style array if necessary
+    const flattenedStyle = Array.isArray(button.props.style)
+      ? Object.assign({}, ...button.props.style)
+      : button.props.style;
 
+    // Assert the backgroundColor
     expect(flattenedStyle.backgroundColor).toBe("#87b0dbff");
   });
 });
