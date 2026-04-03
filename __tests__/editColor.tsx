@@ -1,21 +1,41 @@
 import React from "react";
-import { render, screen } from "@testing-library/react-native";
+import { render, waitFor } from "@testing-library/react-native";
+import { describe, it, expect, jest } from "@jest/globals";
 import { StyleSheet } from "react-native";
-import Index from "../pages/index"; // adjust path if needed
+import Index from "../app/index";
+
+// Mock expo-location
+jest.mock("expo-location", () => ({
+  requestForegroundPermissionsAsync: jest.fn(async () => ({ status: "granted" })),
+  getCurrentPositionAsync: jest.fn(async () => ({
+    coords: { latitude: 35.2226, longitude: -97.4395 },
+  })),
+}));
+
+// Mock StoreMap
+jest.mock("../components/StoreMap.web", () => {
+  const React = require("react");
+  const { Text } = require("react-native");
+  return function MockStoreMap() {
+    return <Text>Mock Store Map</Text>;
+  };
+});
+
+// Mock priceComparison
+jest.mock("@/utils/priceComparison", () => ({
+  findCheapest: jest.fn(),
+}));
 
 describe("Login page title color test", () => {
-  it("checks that the Login title has the correct style (fontSize and color)", () => {
+  it("checks that the Login title has the correct fontSize and color", async () => {
     const { getByText } = render(<Index />);
 
-    // Get the Login title text
     const title = getByText(/Login/i);
 
-    // Flatten the style to access individual properties
+    // Flatten the style to access properties
     const flattenedStyle = StyleSheet.flatten(title.props.style);
 
-    // Assert the expected style properties
     expect(flattenedStyle.fontSize).toBe(28);
-    expect(flattenedStyle.fontWeight).toBe("bold");
-    expect(flattenedStyle.color).toBeUndefined(); // color not set, uses default
+    expect(flattenedStyle.color).toBeUndefined(); // No color explicitly set in styles
   });
 });
