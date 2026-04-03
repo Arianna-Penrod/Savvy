@@ -85,5 +85,6 @@ npx jest_test_/editColor.tsx
     - Example: correct username: MadiUser, wrong case: madiuser --> should fail --> exact case should pass
  
 * editColor.tsx by Vesa Hoxha
-  - test the color of login screen
-
+  - Makes sure that the login page renders the Sign In button with the correct color according to the app’s design               specifications.
+  - The background color is checked to ensure it matches the style defined in styles.button.
+  - If the color changes in the future, this test will fail, alerting developers that the UI has been modified.
