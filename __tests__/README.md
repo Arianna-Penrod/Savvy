@@ -75,9 +75,12 @@ npx jest_tests_/editColor.tsx
     - Ensures the UI updates correctly (login screen disappears)
 
 
-* testProductRecs.tsx by Sarah Haffener
-    - Recommend products based on user's purchase history
-    - Expected output: returns popular products if no purchase history exists
+* * testsResponseTime.tsx by Sarah Haffener
+    - makes sure that the response time of login is quick
+    - This ensures fast logins and Detect Performance Bottlenecks
+    - Support Scalability Testing When expanded, helps evaluate:
+        - How login performs under heavy traffic
+        - Concurrent user handling
  
 * loginCaseSensitivity.tsx by Madi Wallace
     - These tests validate that the login system correctly enforces case-sensitive authentication
