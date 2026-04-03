@@ -10,7 +10,7 @@ npm install
 ## Running Unit Tests
 ### Run index.text.tsx by Arianna Penrod
 ```bash
-npx jest __test__/index.text.tsx
+npx jest __tests__/index.text.tsx
 ```
 ### Run searchProduct.tsx by Sadita Sadat:
 ```bash
@@ -22,19 +22,19 @@ npx jest __tests__/searchProductEmpty.tsx
 ```
 ### Run index.loginflow.test.tsx by Carlyssa Cook
 ```bash
-npx jest __test__/index.loginflow.test.tsx
+npx jest __tests__/index.loginflow.test.tsx
 ```
 ### Run loginCaseSensitivity.tsx by Madi Wallace
 ```bash
-npx jest __test__/loginCaseSensitivity.tsx
+npx jest __tests__/loginCaseSensitivity.tsx
 ```
 ### Run testProductRecs.tsx by Sarah Haffener
 ```bash
-npx jest_test_/testProductRecs.tsx
+npx jest_tests_/testProductRecs.tsx
 ```
 ### Run editColor.tsx by Vesa Hoxha
 ```bash
-npx jest_test_/editColor.tsx
+npx jest_tests_/editColor.tsx
 ```
 
 
