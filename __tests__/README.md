@@ -84,7 +84,7 @@ npx jest_test_/editColor.tsx
     - The username and password must exactly match stored credentials, including uppercase and lowercase letters
     - Example: correct username: MadiUser, wrong case: madiuser --> should fail --> exact case should pass
  
-* editColor.tsx by Vesa Hoxha
-  - Makes sure that the login page renders the Sign In button with the correct color according to the app’s design               specifications.
-  - The background color is checked to ensure it matches the style defined in styles.button.
-  - If the color changes in the future, this test will fail, alerting developers that the UI has been modified.
+* loginTitleStyle.tsx by Vesa Hoxha
+  - Makes sure that the Login page renders with the correct font size and color according to the app’s design specifications.
+  - The font size and of the "Login" title is checked to ensure it matches the expected value of 28.
+  - If the font size or color changes in the future, this test will fail, alerting developers that the UI has been modified.
