@@ -14,7 +14,7 @@ npx jest __test__/index.text.tsx
 ```
 ### Run searchProduct.tsx by Sadita Sadat:
 ```bash
-npx jest __test__/searchProduct.tsx
+npx jest __tests__/searchProduct.tsx
 ```
 ### Run searchProductEmpty.tsx by Himaghna Mandla
 ```bash
