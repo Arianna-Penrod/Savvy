@@ -7,7 +7,7 @@ describe("Login page title color test", () => {
   it("checks that the Login title has the correct style (fontSize and color)", () => {
     const { getByText } = render(<Index />);
 
-    const title = getByText("Login");
+    const title = getByText(/Login/i);
 
     // Flatten the style to access properties
     const flattenedStyle = StyleSheet.flatten(title.props.style);
