@@ -75,7 +75,7 @@ npx jest_tests_/editColor.tsx
     - Ensures the UI updates correctly (login screen disappears)
 
 
-* * testsResponseTime.tsx by Sarah Haffener
+* testsResponseTime.tsx by Sarah Haffener
     - makes sure that the response time of login is quick
     - This ensures fast logins and Detect Performance Bottlenecks
     - Support Scalability Testing When expanded, helps evaluate:
