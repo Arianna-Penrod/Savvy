@@ -26,7 +26,7 @@ jest.mock("@/utils/priceComparison", () => ({
   findCheapest: jest.fn(),
 }));
 
-describe("Login page title color test", () => {
+describe("Login page title style test", () => {
   it("checks that the Login title has the correct fontSize and color", async () => {
     const { getByText } = render(<Index />);
 
