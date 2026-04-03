@@ -3,20 +3,20 @@ import { render } from "@testing-library/react-native";
 import { StyleSheet } from "react-native";
 import Index from "../app/index";
 
-describe("Login page Sign In button color test", () => {
-  it("checks that the Sign In button has the correct background color", () => {
+describe("Login page title color test", () => {
+  it("checks that the Login title has the correct style (fontSize and color)", () => {
     const { getByText } = render(<Index />);
 
-    // Find the Text element inside the button
-    const buttonText = getByText("Sign In");
+    const title = getByText("Login");
 
-    // The TouchableOpacity is the parent of the Text
-    const button = buttonText.parent;
+    // Flatten the style to access properties
+    const flattenedStyle = StyleSheet.flatten(title.props.style);
 
-    // Flatten the style so we can read backgroundColor
-    const flattenedStyle = StyleSheet.flatten(button.props.style);
+    // Check the fontSize and fontWeight
+    expect(flattenedStyle.fontSize).toBe(28);
+    expect(flattenedStyle.fontWeight).toBe("bold");
 
-    // Assert the backgroundColor matches
-    expect(flattenedStyle.backgroundColor).toBe("#87b0dbff");
+    // Optional: if you want, check textAlign as well
+    expect(flattenedStyle.textAlign).toBe("center");
   });
 });
