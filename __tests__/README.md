@@ -18,7 +18,7 @@ npx jest __test__/searchProduct.tsx
 ```
 ### Run searchProductEmpty.tsx by Himaghna Mandla
 ```bash
-npx jest __test__/searchProductEmpty.tsx
+npx jest __tests__/searchProductEmpty.tsx
 ```
 ### Run index.loginflow.test.tsx by Carlyssa Cook
 ```bash
