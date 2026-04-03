@@ -17,7 +17,7 @@ jest.mock("../components/StoreMap.web", () => {
   return function MockStoreMap() {
     return <Text>Mock Store Map</Text>;
   };
-}));
+});
 
 jest.mock("@/utils/priceComparison", () => ({
   findCheapest: jest.fn(),
