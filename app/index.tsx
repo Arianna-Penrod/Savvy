@@ -62,7 +62,6 @@ export default function Index() {
 
   if (locationError) return <ScreenMessage message={locationError} />;
   if (storesError) return <ScreenMessage message={storesError} />;
-  if (locationLoading || !region) return <ScreenMessage message="Loading map..." />;
 
   return (
     <View style={{ flex: 1 }}>
@@ -81,9 +80,13 @@ export default function Index() {
         <BarcodeScanner onScan={handleScanResult} onClose={() => setShowScanner(false)} />
       )}
 
+          {locationLoading || !region ? (
+      <ScreenMessage message="Loading map..." />
+    ) : (
       <View style={{ flex: 1 }}>
         <StoreMap region={region} stores={stores} />
       </View>
-    </View>
-  );
+    )}
+  </View>
+);
 }
