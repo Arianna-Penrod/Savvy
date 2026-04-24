@@ -1,4 +1,5 @@
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import { useRef } from 'react';
 
 type Props = {
   email: string;
@@ -17,6 +18,8 @@ export default function LoginForm({
   onChangePassword,
   onSubmit,
 }: Props) {
+  const inputRef = useRef<TextInput>(null);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Login</Text>
@@ -27,14 +30,20 @@ export default function LoginForm({
         value={email}
         onChangeText={onChangeEmail}
         autoCapitalize="none"
+        keyboardType="email-address"
+        returnKeyType="next"
+        onSubmitEditing={() => inputRef.current?.focus()}
       />
 
       <TextInput
+        ref={inputRef}
         style={styles.input}
         placeholder="Password"
         value={password}
         onChangeText={onChangePassword}
         secureTextEntry
+        returnKeyType="done"
+        onSubmitEditing={onSubmit}
       />
 
       {error ? <Text style={styles.error}>{error}</Text> : null}
