@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { View } from "react-native";
+import { View, Button } from "react-native";
 import StoreMap from "../components/StoreMap.web";
 import LoginForm from "@/components/LoginForm";
 import ProductSearchPanel from "@/components/ProductSearchPanel";
 import ScreenMessage from "@/components/ScreenMessage";
+import BarcodeScanner from "@/components/BarcodeScanner";
 import { useUserLocation } from "@/hooks/useUserLocation";
 import { useNearbyStores } from "@/hooks/useNearbyStores";
 import { findCheapest } from "@/utils/priceComparison";
@@ -19,6 +20,8 @@ export default function Index() {
   const [searchProduct, setSearchProduct] = useState("");
   const [cheapestProduct, setCheapestProduct] = useState<CheapestProduct | null>(null);
 
+  const [showScanner, setShowScanner] = useState(false);
+
   const { region, errorMsg: locationError, loading: locationLoading } = useUserLocation(isLoggedIn);
   const { stores, errorMsg: storesError } = useNearbyStores(region);
 
@@ -33,6 +36,14 @@ export default function Index() {
 
   const handleSearch = () => {
     const result = findCheapest(searchProduct);
+    setCheapestProduct(result);
+  };
+
+  const handleScanResult = (barcode: string) => {
+    setSearchProduct(barcode);
+    setShowScanner(false);
+
+    const result = findCheapest(barcode);
     setCheapestProduct(result);
   };
 
@@ -61,6 +72,14 @@ export default function Index() {
         onSearch={handleSearch}
         result={cheapestProduct}
       />
+
+      <View style={{ padding: 10 }}>
+        <Button title="Scan Barcode" onPress={() => setShowScanner(true)} />
+      </View>
+
+      {showScanner && (
+        <BarcodeScanner onScan={handleScanResult} onClose={() => setShowScanner(false)} />
+      )}
 
       <View style={{ flex: 1 }}>
         <StoreMap region={region} stores={stores} />
