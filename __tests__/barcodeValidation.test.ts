@@ -1,6 +1,6 @@
 import { isValidBarcode } from "../utils/barcodeValidation";
 
-describe("barcode validation", () => {
+describe("barcode validation", () => { // tests for the isValidBarcode function
   test("accepts valid barcode", () => {
     expect(isValidBarcode("012345678905")).toBe(true);
   });
