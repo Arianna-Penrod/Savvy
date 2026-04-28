@@ -8,6 +8,7 @@ import BarcodeScanner from "@/components/BarcodeScanner";
 import { useUserLocation } from "@/hooks/useUserLocation";
 import { useNearbyStores } from "@/hooks/useNearbyStores";
 import { findCheapest } from "@/utils/priceComparison";
+import { isValidBarcode } from "../utils/barcodeValidation";
 import { CheapestProduct } from "@/types/store";
 
 export default function Index() {
@@ -40,6 +41,10 @@ export default function Index() {
   };
 
   const handleScanResult = (barcode: string) => {
+     if (!isValidBarcode(barcode)) { // validate barcode format
+    alert("Invalid barcode scanned."); // show error message to user
+    return;
+     }
     setSearchProduct(barcode);
     setShowScanner(false);
 
