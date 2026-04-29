@@ -33,7 +33,6 @@ export default function Index() {
 
   const [showScanner, setShowScanner] = useState(false);
 
-  const { region, errorMsg: locationError, loading: locationLoading } = useUserLocation(isLoggedIn);
   const { stores, errorMsg: storesError } = useNearbyStores(region);
 
   const handleLogin = () => {
@@ -57,10 +56,10 @@ export default function Index() {
   };
 
   const handleScanResult = (barcode: string) => {
-     if (!isValidBarcode(barcode)) { // validate barcode format
-    alert("Invalid barcode scanned."); // show error message to user
-    return;
-     }
+    if (!isValidBarcode(barcode)) { // validate barcode format
+      alert("Invalid barcode scanned."); // show error message to user
+      return;
+    }
     setSearchProduct(barcode);
     setShowScanner(false);
 
@@ -103,6 +102,17 @@ export default function Index() {
         result={cheapestProduct}
       />
 
+      <View style={{ padding: 10 }}>
+        <Button title="Scan Barcode" onPress={() => setShowScanner(true)} />
+      </View>
+
+      {showScanner && (
+        <BarcodeScanner
+          onScan={handleScanResult}
+          onClose={() => setShowScanner(false)}
+        />
+      )}
+
       {region ? (
         <View style={{ flex: 1 }}>
           <StoreMap region={region} stores={stores} />
@@ -112,21 +122,4 @@ export default function Index() {
       )}
     </View>
   );
-      <View style={{ padding: 10 }}>
-        <Button title="Scan Barcode" onPress={() => setShowScanner(true)} />
-      </View>
-
-      {showScanner && (
-        <BarcodeScanner onScan={handleScanResult} onClose={() => setShowScanner(false)} />
-      )}
-
-          {locationLoading || !region ? (
-      <ScreenMessage message="Loading map..." />
-    ) : (
-      <View style={{ flex: 1 }}>
-        <StoreMap region={region} stores={stores} />
-      </View>
-    )}
-  </View>
-);
 }
