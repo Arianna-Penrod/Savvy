@@ -1,42 +1,39 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import * as Location from "expo-location";
 import { Region } from "../types/store";
 
-export function useUserLocation(enabled: boolean) {
+export function useUserLocation() {
   const [region, setRegion] = useState<Region | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    if (!enabled) return;
+  const requestLocation = async () => {
+    try {
+      setLoading(true);
+      setErrorMsg(null);
 
-    const loadLocation = async () => {
-      try {
-        setLoading(true);
+      const { status } = await Location.requestForegroundPermissionsAsync();
 
-        const { status } = await Location.requestForegroundPermissionsAsync();
-        if (status !== "granted") {
-          setErrorMsg("Permission to access location was denied");
-          return;
-        }
-
-        const location = await Location.getCurrentPositionAsync({});
-        setRegion({
-          latitude: location.coords.latitude,
-          longitude: location.coords.longitude,
-          latitudeDelta: 0.01,
-          longitudeDelta: 0.01,
-        });
-      } catch (error) {
-        console.log(error);
-        setErrorMsg("Failed to get location");
-      } finally {
-        setLoading(false);
+      if (status !== "granted") {
+        setErrorMsg("Permission to access location was denied");
+        return;
       }
-    };
 
-    loadLocation();
-  }, [enabled]);
+      const location = await Location.getCurrentPositionAsync({});
 
-  return { region, errorMsg, loading };
+      setRegion({
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+        latitudeDelta: 0.01,
+        longitudeDelta: 0.01,
+      });
+    } catch (error) {
+      console.log(error);
+      setErrorMsg("Failed to get location");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { region, errorMsg, loading, requestLocation };
 }
