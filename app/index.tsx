@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, Button } from "react-native";
+import { View, Button, ScrollView } from "react-native";
 import StoreMap from "../components/StoreMap.web";
 import LoginForm from "@/components/LoginForm";
 import ProductSearchPanel from "@/components/ProductSearchPanel";
@@ -9,9 +9,28 @@ import { useUserLocation } from "@/hooks/useUserLocation";
 import { useNearbyStores } from "@/hooks/useNearbyStores";
 import { findCheapest } from "@/utils/priceComparison";
 import { isValidBarcode } from "../utils/barcodeValidation";
+import BarcodeUpload from "@/components/BarcodeUpload";
 import { CheapestProduct } from "@/types/store";
 
+// helper function to fetch food name from barcode using OpenFoodFacts API, I couldn't get it to export correctly from services
+async function fetchFoodNameFromBarcode(
+  barcode: string
+): Promise<string | null> {
+  try {
+    const response = await fetch(
+      `https://world.openfoodfacts.org/api/v2/product/${barcode}.json`
+    );
+
+    const data = await response.json();
+
+    return data.product?.product_name || data.product?.generic_name || null;
+  } catch {
+    return null;
+  }
+}
+
 export default function Index() {
+  
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const [email, setEmail] = useState("");
@@ -40,17 +59,18 @@ export default function Index() {
     setCheapestProduct(result);
   };
 
-  const handleScanResult = (barcode: string) => {
-     if (!isValidBarcode(barcode)) { // validate barcode format
-    alert("Invalid barcode scanned."); // show error message to user
+  const handleScanResult = async (barcode: string) => {
+  if (!isValidBarcode(barcode)) { // validate barcode format before processing
+    alert("Invalid barcode scanned.");
     return;
-     }
-    setSearchProduct(barcode);
-    setShowScanner(false);
-
-    const result = findCheapest(barcode);
-    setCheapestProduct(result);
-  };
+  }
+  const foodName = await fetchFoodNameFromBarcode(barcode); // fetch food name from barcode
+  const searchValue = foodName || barcode; // if food name found, use it for search, otherwise fallback to barcode
+  setShowScanner(false); // close scanner after successful scan
+  setSearchProduct(foodName || barcode); // update search input with food name if available
+  const result = findCheapest(searchValue);
+  setCheapestProduct(result);
+};
 
   if (!isLoggedIn) {
     return (
@@ -69,7 +89,7 @@ export default function Index() {
   if (storesError) return <ScreenMessage message={storesError} />;
 
   return (
-    <View style={{ flex: 1 }}>
+    <ScrollView style={{ flex: 1 }} contentContainerStyle={{ paddingBottom: 30 }}>
       <ProductSearchPanel
         searchProduct={searchProduct}
         onChangeSearch={setSearchProduct}
@@ -78,20 +98,23 @@ export default function Index() {
       />
 
       <View style={{ padding: 10 }}>
-        <Button title="Scan Barcode" onPress={() => setShowScanner(true)} />
+        <Button title="Scan Barcode" onPress={() => setShowScanner(true)} /> {/* button to open barcode scanner */}
       </View>
 
+      <BarcodeUpload onScan={handleScanResult} />
+
       {showScanner && (
-        <BarcodeScanner onScan={handleScanResult} onClose={() => setShowScanner(false)} />
+        <BarcodeScanner onScan={handleScanResult} onClose={() => setShowScanner(false)} /> // show scanner when button is pressed, pass handlers for scan result and closing scanner
       )}
 
           {locationLoading || !region ? (
       <ScreenMessage message="Loading map..." />
     ) : (
-      <View style={{ flex: 1 }}>
+      <View style={{ height: 400 }}>
         <StoreMap region={region} stores={stores} />
       </View>
     )}
-  </View>
-);
+
+    </ScrollView>
+    );
 }
