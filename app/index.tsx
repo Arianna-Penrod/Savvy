@@ -4,6 +4,7 @@ import StoreMap from "../components/StoreMap.web";
 import LoginForm from "@/components/LoginForm";
 import ProductSearchPanel from "@/components/ProductSearchPanel";
 import ScreenMessage from "@/components/ScreenMessage";
+import LocationPermissionModal from "@/components/LocationPerms";
 import BarcodeScanner from "@/components/BarcodeScanner";
 import { useUserLocation } from "@/hooks/useUserLocation";
 import { useNearbyStores } from "@/hooks/useNearbyStores";
@@ -32,26 +33,40 @@ async function fetchFoodNameFromBarcode(
 export default function Index() {
   
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showLocationModal, setShowLocationModal] = useState(false);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
 
   const [searchProduct, setSearchProduct] = useState("");
-  const [cheapestProduct, setCheapestProduct] = useState<CheapestProduct | null>(null);
+  const [cheapestProduct, setCheapestProduct] =
+    useState<CheapestProduct | null>(null);
+
+  const {
+    region,
+    errorMsg: locationError,
+    loading: locationLoading,
+    requestLocation,
+  } = useUserLocation();
 
   const [showScanner, setShowScanner] = useState(false);
 
-  const { region, errorMsg: locationError, loading: locationLoading } = useUserLocation(isLoggedIn);
   const { stores, errorMsg: storesError } = useNearbyStores(region);
 
   const handleLogin = () => {
     if (email.trim() === "test@test.com" && password === "123456") {
       setLoginError("");
       setIsLoggedIn(true);
+      setShowLocationModal(true);
     } else {
       setLoginError("Invalid email or password");
     }
+  };
+
+  const handleAllowLocation = async () => {
+    setShowLocationModal(false);
+    await requestLocation();
   };
 
   const handleSearch = () => {
@@ -88,15 +103,24 @@ export default function Index() {
   if (locationError) return <ScreenMessage message={locationError} />;
   if (storesError) return <ScreenMessage message={storesError} />;
 
+  if (locationLoading) {
+    return <ScreenMessage message="Loading map..." />;
+  }
+
   return (
     <ScrollView style={{ flex: 1 }} contentContainerStyle={{ paddingBottom: 30 }}>
+      <LocationPermissionModal
+        visible={showLocationModal}
+        onAllow={handleAllowLocation}
+        onNotNow={() => setShowLocationModal(false)}
+      />
+
       <ProductSearchPanel
         searchProduct={searchProduct}
         onChangeSearch={setSearchProduct}
         onSearch={handleSearch}
         result={cheapestProduct}
       />
-
       <View style={{ padding: 10 }}>
         <Button title="Scan Barcode" onPress={() => setShowScanner(true)} /> {/* button to open barcode scanner */}
       </View>
