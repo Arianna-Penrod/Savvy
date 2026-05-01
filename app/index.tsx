@@ -119,10 +119,6 @@ export default function Index() {
         onNotNow={() => setShowLocationModal(false)}
       />
 
-      <UserProfileManager
-        currentUser={currentUser}
-        onUpdate={setCurrentUser}
-      />
 
       <ProductSearchPanel
         searchProduct={searchProduct}
@@ -147,6 +143,13 @@ export default function Index() {
         <StoreMap region={region} stores={stores} />
       </View>
     )}
+    
+    <View style={{ padding: 16, backgroundColor: "#f5f5f5", marginTop: 20 }}>
+      <UserProfileManager
+        currentUser={currentUser}
+        onUpdate={setCurrentUser}
+      />
+    </View>
 
     </ScrollView>
     );
