@@ -1,6 +1,6 @@
 import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 import { useState } from "react";
-import { user } from "@/demoUser";
+import { user } from "@/data/demoUser";
 
 type Props = {
   currentUser: user;

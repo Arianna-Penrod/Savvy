@@ -13,7 +13,7 @@ import { isValidBarcode } from "../utils/barcodeValidation";
 import BarcodeUpload from "@/components/BarcodeUpload";
 import { CheapestProduct } from "@/types/store";
 import UserProfileManager from "@/components/UserProfileManager";
-import { users } from "@/demoUser";
+import { users } from "@/data/demoUser";
 
 // helper function to fetch food name from barcode using OpenFoodFacts API, I couldn't get it to export correctly from services
 async function fetchFoodNameFromBarcode(
