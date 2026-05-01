@@ -12,6 +12,8 @@ import { findCheapest } from "@/utils/priceComparison";
 import { isValidBarcode } from "../utils/barcodeValidation";
 import BarcodeUpload from "@/components/BarcodeUpload";
 import { CheapestProduct } from "@/types/store";
+import UserProfileManager from "@/components/UserProfileManager";
+import { users } from "@/demoUser";
 
 // helper function to fetch food name from barcode using OpenFoodFacts API, I couldn't get it to export correctly from services
 async function fetchFoodNameFromBarcode(
@@ -31,6 +33,8 @@ async function fetchFoodNameFromBarcode(
 }
 
 export default function Index() {
+
+  const [currentUser, setCurrentUser] = useState(users[0]);
   
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLocationModal, setShowLocationModal] = useState(false);
@@ -113,6 +117,11 @@ export default function Index() {
         visible={showLocationModal}
         onAllow={handleAllowLocation}
         onNotNow={() => setShowLocationModal(false)}
+      />
+
+      <UserProfileManager
+        currentUser={currentUser}
+        onUpdate={setCurrentUser}
       />
 
       <ProductSearchPanel
