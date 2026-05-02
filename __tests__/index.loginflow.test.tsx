@@ -1,59 +1,39 @@
 import React from "react";
-import { render, fireEvent, waitFor } from "@testing-library/react-native";
-import { describe, it, expect, jest } from "@jest/globals";
+import { render, fireEvent } from "@testing-library/react-native";
+import { describe, it, expect, jest, beforeEach } from "@jest/globals";
 import Index from "../app/index";
 
-// Mock expo-location
-jest.mock("expo-location", () => ({
-  requestForegroundPermissionsAsync: jest.fn(async () => ({
-    status: "granted",
-  })),
-  getCurrentPositionAsync: jest.fn(async () => ({
-    coords: {
-      latitude: 35.2226,
-      longitude: -97.4395,
-    },
-  })),
-}));
+const mockReplace = jest.fn();
 
-// Mock StoreMap
-jest.mock("../components/StoreMap.web", () => {
-  const React = require("react");
-  const { Text } = require("react-native");
-  return function MockStoreMap() {
-    return <Text>Mock Store Map</Text>;
-  };
-});
-
-// Mock priceComparison
-jest.mock("@/utils/priceComparison", () => ({
-  findCheapest: jest.fn(),
+jest.mock("expo-router", () => ({
+  router: {
+    replace: mockReplace,
+    push: jest.fn(),
+  },
 }));
 
 describe("Login recovery flow test", () => {
-
-  it("allows user to recover from failed login and successfully sign in", async () => {
-    const { getByPlaceholderText, getByText, queryByText } = render(<Index />);
-
-    const emailInput = getByPlaceholderText("Email");
-    const passwordInput = getByPlaceholderText("Password");
-    const signInButton = getByText("Sign In");
-
-    // Step 1: Wrong password
-    fireEvent.changeText(emailInput, "test@test.com");
-    fireEvent.changeText(passwordInput, "wrongpassword");
-    fireEvent.press(signInButton);
-
-    expect(getByText("Invalid email or password")).toBeTruthy();
-
-    // Step 2: Correct password
-    fireEvent.changeText(passwordInput, "123456");
-    fireEvent.press(signInButton);
-
-    // Step 3: Login success
-    await waitFor(() => {
-      expect(queryByText("Sign In")).toBeNull();
-    });
+  beforeEach(() => {
+    mockReplace.mockClear();
   });
 
+  it("allows the user to recover from a failed login and then successfully sign in", () => {
+    const { getByPlaceholderText, getByText } = render(<Index />);
+
+    const emailInput = getByPlaceholderText("test@test.com");
+    const passwordInput = getByPlaceholderText("123456");
+    const loginButton = getByText("Log In");
+
+    fireEvent.changeText(emailInput, "test@test.com");
+    fireEvent.changeText(passwordInput, "wrongpassword");
+    fireEvent.press(loginButton);
+
+    expect(getByText("Invalid email or password")).toBeTruthy();
+    expect(mockReplace).not.toHaveBeenCalled();
+
+    fireEvent.changeText(passwordInput, "123456");
+    fireEvent.press(loginButton);
+
+    expect(mockReplace).toHaveBeenCalledWith("/landing");
+  });
 });

@@ -1,72 +1,67 @@
 import React from "react";
-import { render, fireEvent, waitFor } from "@testing-library/react-native";
-import { describe, expect, it, jest } from "@jest/globals";
+import { render, fireEvent } from "@testing-library/react-native";
+import { describe, expect, it, jest, beforeEach } from "@jest/globals";
 import Index from "../app/index";
 
-// Mock expo-location so login success doesn't try to use the real device location
-jest.mock("expo-location", () => ({
-  requestForegroundPermissionsAsync: jest.fn(async () => ({
-    status: "granted",
-  })),
-  getCurrentPositionAsync: jest.fn(async () => ({
-    coords: {
-      latitude: 35.2226,
-      longitude: -97.4395,
-    },
-  })),
+const mockReplace = jest.fn();
+
+jest.mock("expo-router", () => ({
+  router: {
+    replace: mockReplace,
+    push: jest.fn(),
+  },
 }));
 
-// Mock StoreMap so the map component doesn't break the test
-jest.mock("../components/StoreMap.web", () => {
-  const React = require("react");
-  const { Text } = require("react-native");
-  return function MockStoreMap() {
-    return <Text>Mock Store Map</Text>;
-  };
-});
+describe("Index login tests", () => {
+  beforeEach(() => {
+    mockReplace.mockClear();
+  });
 
-// Mock priceComparison import used by the component
-jest.mock("@/utils/priceComparison", () => ({
-  findCheapest: jest.fn(),
-}));
+  it("shows the pretty login screen", () => {
+    const { getByText } = render(<Index />);
 
-describe("Index login password tests", () => {
+    expect(getByText("Savvy")).toBeTruthy();
+    expect(getByText("Welcome back")).toBeTruthy();
+    expect(getByText("Log In")).toBeTruthy();
+  });
+
   it("marks the password input as secure", () => {
     const { getByPlaceholderText } = render(<Index />);
 
-    const passwordInput = getByPlaceholderText("Password");
+    const passwordInput = getByPlaceholderText("123456");
+
     expect(passwordInput.props.secureTextEntry).toBe(true);
   });
 
   it("shows an error when the password is incorrect", () => {
     const { getByPlaceholderText, getByText } = render(<Index />);
 
-    fireEvent.changeText(getByPlaceholderText("Email"), "test@test.com");
-    fireEvent.changeText(getByPlaceholderText("Password"), "wrongpassword");
-    fireEvent.press(getByText("Sign In"));
+    fireEvent.changeText(getByPlaceholderText("test@test.com"), "test@test.com");
+    fireEvent.changeText(getByPlaceholderText("123456"), "wrongpassword");
+    fireEvent.press(getByText("Log In"));
 
     expect(getByText("Invalid email or password")).toBeTruthy();
+    expect(mockReplace).not.toHaveBeenCalled();
   });
 
-  it("logs in successfully when the password is correct", async () => {
-    const { getByPlaceholderText, getByText, queryByText } = render(<Index />);
+  it("logs in successfully when the email and password are correct", () => {
+    const { getByPlaceholderText, getByText } = render(<Index />);
 
-    fireEvent.changeText(getByPlaceholderText("Email"), "test@test.com");
-    fireEvent.changeText(getByPlaceholderText("Password"), "123456");
-    fireEvent.press(getByText("Sign In"));
+    fireEvent.changeText(getByPlaceholderText("test@test.com"), "test@test.com");
+    fireEvent.changeText(getByPlaceholderText("123456"), "123456");
+    fireEvent.press(getByText("Log In"));
 
-    await waitFor(() => {
-      expect(queryByText("Sign In")).toBeNull();
-    });
+    expect(mockReplace).toHaveBeenCalledWith("/landing");
   });
 
   it("fails login when the password is empty", () => {
     const { getByPlaceholderText, getByText } = render(<Index />);
 
-    fireEvent.changeText(getByPlaceholderText("Email"), "test@test.com");
-    fireEvent.changeText(getByPlaceholderText("Password"), "");
-    fireEvent.press(getByText("Sign In"));
+    fireEvent.changeText(getByPlaceholderText("test@test.com"), "test@test.com");
+    fireEvent.changeText(getByPlaceholderText("123456"), "");
+    fireEvent.press(getByText("Log In"));
 
     expect(getByText("Invalid email or password")).toBeTruthy();
+    expect(mockReplace).not.toHaveBeenCalled();
   });
 });
