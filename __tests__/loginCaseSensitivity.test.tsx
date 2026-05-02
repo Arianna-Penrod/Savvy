@@ -1,20 +1,22 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react-native";
 import { describe, it, expect, jest, beforeEach } from "@jest/globals";
-import Index from "../app/index";
-
-const mockReplace = jest.fn();
 
 jest.mock("expo-router", () => ({
+  __esModule: true,
   router: {
-    replace: mockReplace,
+    replace: jest.fn(),
     push: jest.fn(),
   },
 }));
 
+const { router } = require("expo-router");
+const Index = require("../app/index").default;
+
 describe("Login case sensitivity tests", () => {
   beforeEach(() => {
-    mockReplace.mockClear();
+    router.replace.mockClear();
+    router.push.mockClear();
   });
 
   it("fails login when the email case is incorrect", () => {
@@ -25,7 +27,7 @@ describe("Login case sensitivity tests", () => {
     fireEvent.press(getByText("Log In"));
 
     expect(getByText("Invalid email or password")).toBeTruthy();
-    expect(mockReplace).not.toHaveBeenCalled();
+    expect(router.replace).not.toHaveBeenCalled();
   });
 
   it("fails login when the password is incorrect", () => {
@@ -36,7 +38,7 @@ describe("Login case sensitivity tests", () => {
     fireEvent.press(getByText("Log In"));
 
     expect(getByText("Invalid email or password")).toBeTruthy();
-    expect(mockReplace).not.toHaveBeenCalled();
+    expect(router.replace).not.toHaveBeenCalled();
   });
 
   it("passes login only with the exact correct email and password", () => {
@@ -46,6 +48,6 @@ describe("Login case sensitivity tests", () => {
     fireEvent.changeText(getByPlaceholderText("123456"), "123456");
     fireEvent.press(getByText("Log In"));
 
-    expect(mockReplace).toHaveBeenCalledWith("/landing");
+    expect(router.replace).toHaveBeenCalledWith("/landing");
   });
 });

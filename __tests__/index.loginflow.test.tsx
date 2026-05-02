@@ -1,20 +1,22 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react-native";
 import { describe, it, expect, jest, beforeEach } from "@jest/globals";
-import Index from "../app/index";
-
-const mockReplace = jest.fn();
 
 jest.mock("expo-router", () => ({
+  __esModule: true,
   router: {
-    replace: mockReplace,
+    replace: jest.fn(),
     push: jest.fn(),
   },
 }));
 
+const { router } = require("expo-router");
+const Index = require("../app/index").default;
+
 describe("Login recovery flow test", () => {
   beforeEach(() => {
-    mockReplace.mockClear();
+    router.replace.mockClear();
+    router.push.mockClear();
   });
 
   it("allows the user to recover from a failed login and then successfully sign in", () => {
@@ -29,11 +31,11 @@ describe("Login recovery flow test", () => {
     fireEvent.press(loginButton);
 
     expect(getByText("Invalid email or password")).toBeTruthy();
-    expect(mockReplace).not.toHaveBeenCalled();
+    expect(router.replace).not.toHaveBeenCalled();
 
     fireEvent.changeText(passwordInput, "123456");
     fireEvent.press(loginButton);
 
-    expect(mockReplace).toHaveBeenCalledWith("/landing");
+    expect(router.replace).toHaveBeenCalledWith("/landing");
   });
 });
