@@ -1,4 +1,10 @@
-import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
 import { useState } from "react";
 import { user } from "@/data/demoUser";
 
@@ -11,7 +17,11 @@ export default function UserProfileManager({ currentUser, onUpdate }: Props) {
   const [radius, setRadius] = useState(currentUser.radiusMiles.toString());
   const [list, setList] = useState(currentUser.list);
 
-  const handleItemChange = (index: number, field: "name" | "quantity", value: string) => {
+  const handleItemChange = (
+    index: number,
+    field: "name" | "quantity",
+    value: string
+  ) => {
     const updatedList = [...list];
 
     if (field === "quantity") {
@@ -36,7 +46,7 @@ export default function UserProfileManager({ currentUser, onUpdate }: Props) {
     const updatedUser = {
       ...currentUser,
       radiusMiles: parseFloat(radius),
-      list: list,
+      list,
     };
 
     onUpdate(updatedUser);
@@ -45,68 +55,179 @@ export default function UserProfileManager({ currentUser, onUpdate }: Props) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>User Profile</Text>
+      <Text style={styles.title}>Shopping Preferences</Text>
 
-      <Text>User ID: {currentUser.userID}</Text>
+      <View style={styles.infoPill}>
+        <Text style={styles.infoPillText}>User ID: {currentUser.userID}</Text>
+      </View>
 
-      {/* Radius */}
-      <Text style={styles.label}>Search Radius (miles)</Text>
+      <Text style={styles.label}>Search Radius in Miles</Text>
       <TextInput
         style={styles.input}
         value={radius}
         onChangeText={setRadius}
         keyboardType="numeric"
+        placeholder="Example: 10"
+        placeholderTextColor="#94a3b8"
       />
 
-      {/* Shopping List */}
-      <Text style={styles.subtitle}>Shopping List:</Text>
+      <Text style={styles.subtitle}>Shopping List</Text>
 
       {list.map((item, index) => (
         <View key={index} style={styles.row}>
           <TextInput
-            style={styles.inputSmall}
+            style={styles.itemInput}
             value={item.name}
             placeholder="Item"
+            placeholderTextColor="#94a3b8"
             onChangeText={(text) => handleItemChange(index, "name", text)}
           />
 
           <TextInput
-            style={styles.inputSmall}
+            style={styles.quantityInput}
             value={item.quantity.toString()}
+            placeholder="Qty"
+            placeholderTextColor="#94a3b8"
             keyboardType="numeric"
             onChangeText={(text) => handleItemChange(index, "quantity", text)}
           />
 
-          <Button title="X" onPress={() => removeItem(index)} />
+          <TouchableOpacity
+            style={styles.removeButton}
+            onPress={() => removeItem(index)}
+          >
+            <Text style={styles.removeButtonText}>×</Text>
+          </TouchableOpacity>
         </View>
       ))}
 
-      <Button title="Add Item" onPress={addItem} />
+      <TouchableOpacity style={styles.secondaryButton} onPress={addItem}>
+        <Text style={styles.secondaryButtonText}>Add Item</Text>
+      </TouchableOpacity>
 
-      <View style={{ marginTop: 10 }}>
-        <Button title="Save Profile" onPress={handleSave} />
-      </View>
+      <TouchableOpacity style={styles.primaryButton} onPress={handleSave}>
+        <Text style={styles.primaryButtonText}>Save Profile</Text>
+      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { padding: 16, backgroundColor: "#fff" },
-  title: { fontSize: 20, fontWeight: "bold", marginBottom: 10 },
-  subtitle: { marginTop: 10, fontWeight: "bold" },
-  label: { marginTop: 10 },
-  row: { flexDirection: "row", alignItems: "center", gap: 8 },
-  input: {
+  container: {
+    padding: 18,
+    backgroundColor: "#ffffff",
+    borderRadius: 22,
     borderWidth: 1,
-    borderColor: "#ccc",
-    padding: 8,
+    borderColor: "#dbeafe",
+    shadowColor: "#000000",
+    shadowOpacity: 0.06,
+    shadowRadius: 10,
+    elevation: 2,
+  },
+  title: {
+    fontSize: 21,
+    fontWeight: "900",
+    color: "#1d4ed8",
     marginBottom: 10,
   },
-  inputSmall: {
+  infoPill: {
+    alignSelf: "flex-start",
+    backgroundColor: "#eff6ff",
     borderWidth: 1,
-    borderColor: "#ccc",
-    padding: 6,
-    width: 100,
-    marginRight: 5,
+    borderColor: "#bfdbfe",
+    paddingVertical: 7,
+    paddingHorizontal: 12,
+    borderRadius: 999,
+    marginBottom: 14,
+  },
+  infoPillText: {
+    color: "#1e3a8a",
+    fontWeight: "800",
+  },
+  label: {
+    color: "#1e3a8a",
+    fontWeight: "800",
+    marginBottom: 7,
+  },
+  subtitle: {
+    marginTop: 14,
+    marginBottom: 10,
+    fontSize: 17,
+    fontWeight: "900",
+    color: "#0f172a",
+  },
+  row: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    marginBottom: 10,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#bfdbfe",
+    backgroundColor: "#f8fbff",
+    borderRadius: 14,
+    paddingVertical: 12,
+    paddingHorizontal: 14,
+    marginBottom: 10,
+    color: "#0f172a",
+  },
+  itemInput: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: "#bfdbfe",
+    backgroundColor: "#f8fbff",
+    borderRadius: 14,
+    paddingVertical: 12,
+    paddingHorizontal: 14,
+    color: "#0f172a",
+  },
+  quantityInput: {
+    width: 75,
+    borderWidth: 1,
+    borderColor: "#bfdbfe",
+    backgroundColor: "#f8fbff",
+    borderRadius: 14,
+    paddingVertical: 12,
+    paddingHorizontal: 14,
+    color: "#0f172a",
+  },
+  removeButton: {
+    width: 42,
+    height: 42,
+    borderRadius: 21,
+    backgroundColor: "#dbeafe",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  removeButtonText: {
+    color: "#1d4ed8",
+    fontSize: 24,
+    fontWeight: "900",
+    lineHeight: 26,
+  },
+  secondaryButton: {
+    backgroundColor: "#eff6ff",
+    borderWidth: 1,
+    borderColor: "#bfdbfe",
+    paddingVertical: 13,
+    borderRadius: 14,
+    marginTop: 8,
+  },
+  secondaryButtonText: {
+    color: "#1d4ed8",
+    textAlign: "center",
+    fontWeight: "900",
+  },
+  primaryButton: {
+    backgroundColor: "#2563eb",
+    paddingVertical: 14,
+    borderRadius: 14,
+    marginTop: 10,
+  },
+  primaryButtonText: {
+    color: "#ffffff",
+    textAlign: "center",
+    fontWeight: "900",
   },
 });

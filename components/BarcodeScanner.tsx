@@ -1,35 +1,56 @@
 import { useState } from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { CameraView, useCameraPermissions } from "expo-camera";
 
-
 type BarcodeScannerProps = {
-  onScan: (barcode: string) => void; // callback to handle scanned barcode
-  onClose: () => void; // callback to close the scanner
+  onScan: (barcode: string) => void;
+  onClose: () => void;
 };
 
-export default function BarcodeScanner({ onScan, onClose }: BarcodeScannerProps) {
-  const [permission, requestPermission] = useCameraPermissions(); // secure camera permissions
-  const [scanned, setScanned] = useState(false); // state to prevent multiple scans
-  const [facing, setFacing] = useState<"front" | "back">("back"); // state to toggle camera
+export default function BarcodeScanner({
+  onScan,
+  onClose,
+}: BarcodeScannerProps) {
+  const [permission, requestPermission] = useCameraPermissions();
+  const [scanned, setScanned] = useState(false);
+  const [facing, setFacing] = useState<"front" | "back">("back");
 
   if (!permission) {
-    return <Text>Checking camera permission...</Text>; 
-  }
-
-  if (!permission.granted) { // if permission is not granted, show button to request it
     return (
       <View style={styles.container}>
-        <Text>Camera permission is needed to scan barcodes.</Text>
-        <Button title="Allow Camera" onPress={requestPermission} />
-        <Button title="Close Scanner" onPress={onClose} />
+        <Text style={styles.message}>Checking camera permission...</Text>
       </View>
     );
   }
 
-  return ( // show camera view to scan barcodes
+  if (!permission.granted) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>Camera Access Needed</Text>
+
+        <Text style={styles.message}>
+          Savvy needs camera permission to scan product barcodes.
+        </Text>
+
+        <TouchableOpacity style={styles.primaryButton} onPress={requestPermission}>
+          <Text style={styles.primaryButtonText}>Allow Camera</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.secondaryButton} onPress={onClose}>
+          <Text style={styles.secondaryButtonText}>Close Scanner</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
+  return (
     <View style={styles.cameraWrapper}>
-      <Text style={styles.title}>Scan Barcode</Text>
+      <View style={styles.header}>
+        <Text style={styles.title}>Scan Barcode</Text>
+        <Text style={styles.message}>
+          Point your camera at the product barcode.
+        </Text>
+      </View>
 
       <CameraView
         style={styles.camera}
@@ -37,50 +58,118 @@ export default function BarcodeScanner({ onScan, onClose }: BarcodeScannerProps)
         barcodeScannerSettings={{
           barcodeTypes: ["ean13", "ean8", "upc_a", "upc_e", "code128"],
         }}
-        onBarcodeScanned={ // if already scanned, ignore further scans until user closes and reopens scanner
-        scanned
-    ? undefined
-    : ({ data, type }) => {
-        console.log("SCANNED:", type, data);
-        alert(`Scanned: ${data}`);
-        setScanned(true);
-        onScan(data);
-      }
-}
+        onBarcodeScanned={
+          scanned
+            ? undefined
+            : ({ data, type }) => {
+                console.log("SCANNED:", type, data);
+                alert(`Scanned: ${data}`);
+                setScanned(true);
+                onScan(data);
+              }
+        }
       />
-      <Button // button to flip camera between front and back
-      title="Flip Camera"
-      onPress={() =>
-        setFacing((prev) => (prev === "back" ? "front" : "back"))
-      }
-    />
 
-       <Button title="Close Scanner" onPress={onClose} />
-  </View>
-    
+      <View style={styles.buttonRow}>
+        <TouchableOpacity
+          style={styles.secondaryButton}
+          onPress={() =>
+            setFacing((prev) => (prev === "back" ? "front" : "back"))
+          }
+        >
+          <Text style={styles.secondaryButtonText}>Flip Camera</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.closeButton} onPress={onClose}>
+          <Text style={styles.closeButtonText}>Close</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 }
 
-const styles = StyleSheet.create({ // basic styles for the scanner UI
+const styles = StyleSheet.create({
   container: {
-    padding: 15,
-    backgroundColor: "#eeeeee",
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 10,
+    padding: 18,
+    backgroundColor: "#ffffff",
+    borderRadius: 22,
+    borderWidth: 1,
+    borderColor: "#dbeafe",
   },
   cameraWrapper: {
-    height: 400,
     width: "100%",
     overflow: "hidden",
     marginBottom: 10,
-    backgroundColor: "black",
+    backgroundColor: "#ffffff",
+    borderRadius: 22,
+    borderWidth: 1,
+    borderColor: "#dbeafe",
+  },
+  header: {
+    padding: 16,
+    backgroundColor: "#eff6ff",
+    borderBottomWidth: 1,
+    borderBottomColor: "#dbeafe",
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: "900",
+    color: "#1d4ed8",
+    marginBottom: 4,
+  },
+  message: {
+    fontSize: 14,
+    lineHeight: 21,
+    color: "#64748b",
+    marginBottom: 12,
   },
   camera: {
-    height: 400,
+    height: 360,
     width: "100%",
-    backgroundColor: "black",
+    backgroundColor: "#000000",
+  },
+  buttonRow: {
+    flexDirection: "row",
+    gap: 10,
+    padding: 14,
+    backgroundColor: "#ffffff",
+  },
+  primaryButton: {
+    backgroundColor: "#2563eb",
+    paddingVertical: 13,
+    paddingHorizontal: 16,
+    borderRadius: 14,
+    marginTop: 6,
+  },
+  primaryButtonText: {
+    color: "#ffffff",
+    textAlign: "center",
+    fontWeight: "900",
+  },
+  secondaryButton: {
+    flex: 1,
+    backgroundColor: "#eff6ff",
+    borderWidth: 1,
+    borderColor: "#bfdbfe",
+    paddingVertical: 13,
+    paddingHorizontal: 16,
+    borderRadius: 14,
+  },
+  secondaryButtonText: {
+    color: "#1d4ed8",
+    textAlign: "center",
+    fontWeight: "900",
+  },
+  closeButton: {
+    flex: 1,
+    backgroundColor: "#2563eb",
+    paddingVertical: 13,
+    paddingHorizontal: 16,
+    borderRadius: 14,
+  },
+  closeButtonText: {
+    color: "#ffffff",
+    textAlign: "center",
+    fontWeight: "900",
   },
 });

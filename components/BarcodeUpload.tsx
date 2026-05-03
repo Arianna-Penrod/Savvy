@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, Text, Button } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { BrowserMultiFormatReader } from "@zxing/browser";
 
 type BarcodeUploadProps = {
@@ -42,9 +42,37 @@ export default function BarcodeUpload({ onScan }: BarcodeUploadProps) {
   };
 
   return (
-    <View style={{ padding: 10 }}>
-      <Button title="Upload Barcode Image" onPress={handleUpload} />
-      {message && <Text>{message}</Text>}
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.uploadButton} onPress={handleUpload}>
+        <Text style={styles.uploadButtonText}>Upload Barcode Image</Text>
+      </TouchableOpacity>
+
+      {message ? <Text style={styles.message}>{message}</Text> : null}
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 10,
+  },
+  uploadButton: {
+    backgroundColor: "#eff6ff",
+    borderWidth: 1,
+    borderColor: "#bfdbfe",
+    paddingVertical: 13,
+    paddingHorizontal: 16,
+    borderRadius: 14,
+  },
+  uploadButtonText: {
+    color: "#1d4ed8",
+    textAlign: "center",
+    fontWeight: "900",
+  },
+  message: {
+    marginTop: 10,
+    color: "#475569",
+    fontWeight: "700",
+    textAlign: "center",
+  },
+});

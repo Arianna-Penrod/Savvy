@@ -1,10 +1,17 @@
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
-import { useRef } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 
-type Props = {
+type LoginFormProps = {
   email: string;
   password: string;
-  error?: string;
+  error: string;
   onChangeEmail: (value: string) => void;
   onChangePassword: (value: string) => void;
   onSubmit: () => void;
@@ -17,79 +24,176 @@ export default function LoginForm({
   onChangeEmail,
   onChangePassword,
   onSubmit,
-}: Props) {
-  const inputRef = useRef<TextInput>(null);
-
+}: LoginFormProps) {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
+    <KeyboardAvoidingView
+      style={styles.page}
+      behavior={Platform.OS === "ios" ? "padding" : undefined}
+    >
+      <View style={styles.circleOne} />
+      <View style={styles.circleTwo} />
 
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        value={email}
-        onChangeText={onChangeEmail}
-        autoCapitalize="none"
-        keyboardType="email-address"
-        returnKeyType="next"
-        onSubmitEditing={() => inputRef.current?.focus()}
-      />
+      <View style={styles.card}>
+        <View style={styles.logoBubble}>
+          <Text style={styles.logoText}>S</Text>
+        </View>
 
-      <TextInput
-        ref={inputRef}
-        style={styles.input}
-        placeholder="Password"
-        value={password}
-        onChangeText={onChangePassword}
-        secureTextEntry
-        returnKeyType="done"
-        onSubmitEditing={onSubmit}
-      />
+        <Text style={styles.appName}>Savvy</Text>
+        <Text style={styles.title}>Welcome back</Text>
+        <Text style={styles.subtitle}>
+          Sign in to find nearby stores, compare prices, and manage your shopping list.
+        </Text>
 
-      {error ? <Text style={styles.error}>{error}</Text> : null}
+        <View style={styles.formGroup}>
+          <Text style={styles.label}>Email</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="test@test.com"
+            placeholderTextColor="#94a3b8"
+            value={email}
+            onChangeText={onChangeEmail}
+            autoCapitalize="none"
+            keyboardType="email-address"
+          />
+        </View>
 
-      <TouchableOpacity style={styles.button} onPress={onSubmit}>
-        <Text style={styles.buttonText}>Sign In</Text>
-      </TouchableOpacity>
-    </View>
+        <View style={styles.formGroup}>
+          <Text style={styles.label}>Password</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="123456"
+            placeholderTextColor="#94a3b8"
+            value={password}
+            onChangeText={onChangePassword}
+            secureTextEntry
+            onSubmitEditing={onSubmit}
+          />
+        </View>
+
+        {error ? <Text style={styles.error}>{error}</Text> : null}
+
+        <TouchableOpacity style={styles.button} onPress={onSubmit}>
+          <Text style={styles.buttonText}>Log In</Text>
+        </TouchableOpacity>
+
+        <Text style={styles.hint}>Demo login: test@test.com / 123456</Text>
+      </View>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  page: {
     flex: 1,
+    backgroundColor: "#f8fbff",
     justifyContent: "center",
-    paddingHorizontal: 24,
-    backgroundColor: "#AAA",
+    alignItems: "center",
+    padding: 22,
+  },
+  circleOne: {
+    position: "absolute",
+    top: -80,
+    right: -80,
+    width: 230,
+    height: 230,
+    borderRadius: 115,
+    backgroundColor: "#dbeafe",
+  },
+  circleTwo: {
+    position: "absolute",
+    bottom: -90,
+    left: -90,
+    width: 260,
+    height: 260,
+    borderRadius: 130,
+    backgroundColor: "#bfdbfe",
+  },
+  card: {
+    width: "100%",
+    maxWidth: 430,
+    backgroundColor: "#ffffff",
+    borderRadius: 28,
+    padding: 26,
+    shadowColor: "#000000",
+    shadowOpacity: 0.12,
+    shadowRadius: 18,
+    elevation: 5,
+  },
+  logoBubble: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    backgroundColor: "#2563eb",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 14,
+  },
+  logoText: {
+    color: "#ffffff",
+    fontSize: 30,
+    fontWeight: "900",
+  },
+  appName: {
+    fontSize: 18,
+    fontWeight: "800",
+    color: "#3b82f6",
+    marginBottom: 4,
   },
   title: {
-    fontSize: 28,
-    fontWeight: "bold",
+    fontSize: 32,
+    fontWeight: "900",
+    color: "#0f172a",
+    marginBottom: 8,
+  },
+  subtitle: {
+    fontSize: 15,
+    lineHeight: 22,
+    color: "#64748b",
     marginBottom: 24,
-    textAlign: "center",
+  },
+  formGroup: {
+    marginBottom: 14,
+  },
+  label: {
+    fontSize: 14,
+    fontWeight: "700",
+    color: "#1e3a8a",
+    marginBottom: 7,
   },
   input: {
+    backgroundColor: "#f8fafc",
     borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 8,
-    padding: 12,
+    borderColor: "#cbd5e1",
+    borderRadius: 14,
+    paddingVertical: 13,
+    paddingHorizontal: 14,
+    fontSize: 16,
+    color: "#0f172a",
+  },
+  error: {
+    color: "#b91c1c",
+    backgroundColor: "#fee2e2",
+    borderRadius: 12,
+    padding: 10,
     marginBottom: 12,
-    backgroundColor: "#fff",
+    fontWeight: "600",
   },
   button: {
-    backgroundColor: "#87b0dbff",
-    padding: 14,
-    borderRadius: 8,
+    backgroundColor: "#2563eb",
+    borderRadius: 16,
+    paddingVertical: 15,
     marginTop: 8,
   },
   buttonText: {
-    color: "#fff",
+    color: "#ffffff",
     textAlign: "center",
-    fontWeight: "bold",
+    fontSize: 16,
+    fontWeight: "800",
   },
-  error: {
-    color: "red",
-    marginBottom: 10,
+  hint: {
+    marginTop: 16,
     textAlign: "center",
+    color: "#64748b",
+    fontSize: 13,
   },
 });

@@ -1,14 +1,7 @@
 import { describe, it, expect } from "@jest/globals";
 import { findCheapest } from "../utils/priceComparison";
 
-/*
-  These tests validate the core price comparison logic used in the app.
-  The function should:
-  - Return the cheapest store for a given product
-*/
-
 describe("findCheapest function tests", () => {
-
   it("returns cheapest price for Milk", () => {
     const result = findCheapest("Milk");
 
@@ -35,5 +28,4 @@ describe("findCheapest function tests", () => {
       price: 2.99,
     });
   });
-
 });

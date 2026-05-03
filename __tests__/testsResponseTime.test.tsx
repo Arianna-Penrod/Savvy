@@ -1,28 +1,29 @@
+import { describe, it, expect } from "@jest/globals";
 import { performance } from "perf_hooks";
 
-// Mock login function (replace with real API call)
-async function login(username, password) {
+type LoginResponse = {
+  status: number;
+  token: string;
+};
+
+async function login(username: string, password: string): Promise<LoginResponse> {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve({ status: 200, token: "abc123" });
-    }, 200); // simulate 200ms response time
+    }, 200);
   });
 }
 
-describe("Login API Performance Test", () => {
-  
-  it("should respond within acceptable time (<= 500ms)", async () => {
+describe("Login API performance test", () => {
+  it("responds within acceptable time", async () => {
     const startTime = performance.now();
 
-    const response = await login("testUser", "password123");
+    const response = await login("test@test.com", "123456");
 
     const endTime = performance.now();
     const responseTime = endTime - startTime;
 
-    console.log(`Response Time: ${responseTime} ms`);
-
     expect(response.status).toBe(200);
     expect(responseTime).toBeLessThanOrEqual(500);
   });
-
 });
