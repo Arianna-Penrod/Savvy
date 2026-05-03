@@ -13,6 +13,7 @@ import { isValidBarcode } from "../utils/barcodeValidation";
 import BarcodeUpload from "@/components/BarcodeUpload";
 import { CheapestProduct } from "@/types/store";
 import UserProfileManager from "@/components/UserProfileManager";
+import UserRecommendations from "@/components/UserRecommendations";
 import { users } from "@/data/demoUser";
 
 // helper function to fetch food name from barcode using OpenFoodFacts API, I couldn't get it to export correctly from services
@@ -91,6 +92,7 @@ export default function Index() {
   setCheapestProduct(result);
 };
 
+
   if (!isLoggedIn) {
     return (
       <LoginForm
@@ -151,6 +153,10 @@ export default function Index() {
       />
     </View>
 
+    <UserRecommendations />
+
     </ScrollView>
     );
 }
+
+
