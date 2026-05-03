@@ -18,6 +18,7 @@ const navItems = [
   { label: "Home", href: "/landing" },
   { label: "My List", href: "/list" },
   { label: "Barcode", href: "/barcode" },
+  { label: "Profile", href: "/profile" },
 ] as const;
 
 export default function AppLayout({

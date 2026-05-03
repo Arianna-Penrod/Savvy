@@ -7,6 +7,7 @@ export default function RootLayout() {
       <Stack.Screen name="landing" />
       <Stack.Screen name="list" />
       <Stack.Screen name="barcode" />
+      <Stack.Screen name="profile" />
     </Stack>
   );
 }
