@@ -36,7 +36,7 @@ describe("PasswordVerification", () => {
   });
 
   it("does not log an error for the allowed password", () => {
-    PasswordVerification({ password: "test1234" });
+    PasswordVerification({ password: "123456" });
     expect(consoleLogSpy).not.toHaveBeenCalled();
   });
 
