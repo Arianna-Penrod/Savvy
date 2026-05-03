@@ -1,18 +1,61 @@
 import { useState } from "react";
+import { View, Text, StyleSheet } from "react-native";
 
 import AppLayout from "@/components/AppLayout";
 import UserProfileManager from "@/components/UserProfileManager";
 import UserRecommendations from "@/components/UserRecommendations";
 import { users } from "@/data/demoUser";
+import { findBestStore } from "@/utils/bestStore";
 
 export default function ProfilePage() {
   const [currentUser, setCurrentUser] = useState(users[0]);
 
+  const bestStore = findBestStore(currentUser);
+
   return (
     <AppLayout
       title="My Profile"
-      subtitle="Update your shopping preferences, search radius, and personalized savings recommendations."
+      subtitle="Update your shopping preferences and find the best store for your list."
     >
+      {bestStore && (
+        <View style={styles.card}>
+          <Text style={styles.sectionTitle}>Best Store for Your List</Text>
+
+          <Text style={styles.storeName}>{bestStore.store.name}</Text>
+
+          <Text style={styles.text}>
+            Total price: ${bestStore.totalPrice.toFixed(2)}
+          </Text>
+
+          <Text style={styles.text}>
+            Distance: {bestStore.distanceMiles.toFixed(2)} miles
+          </Text>
+
+          <View style={styles.divider} />
+
+          {bestStore.foundItems.map((item) => (
+            <Text key={item.name} style={styles.itemText}>
+              {item.quantity} × {item.name}: ${item.totalPrice.toFixed(2)}
+            </Text>
+          ))}
+
+          {bestStore.missingItems.length > 0 && (
+            <Text style={styles.warningText}>
+              Missing: {bestStore.missingItems.join(", ")}
+            </Text>
+          )}
+        </View>
+      )}
+
+      {!bestStore && (
+        <View style={styles.card}>
+          <Text style={styles.sectionTitle}>No Best Store Found</Text>
+          <Text style={styles.text}>
+            No stores within your radius had matching items.
+          </Text>
+        </View>
+      )}
+
       <UserProfileManager
         currentUser={currentUser}
         onUpdate={setCurrentUser}
@@ -22,3 +65,55 @@ export default function ProfilePage() {
     </AppLayout>
   );
 }
+
+const styles = StyleSheet.create({
+  card: {
+    backgroundColor: "#ffffff",
+    padding: 18,
+    borderRadius: 22,
+    marginBottom: 18,
+    borderWidth: 1,
+    borderColor: "#dbeafe",
+    shadowColor: "#000000",
+    shadowOpacity: 0.06,
+    shadowRadius: 10,
+    elevation: 2,
+  },
+  sectionTitle: {
+    fontSize: 19,
+    fontWeight: "900",
+    color: "#1d4ed8",
+    marginBottom: 8,
+  },
+  storeName: {
+    fontSize: 22,
+    fontWeight: "900",
+    color: "#0f172a",
+    marginBottom: 8,
+  },
+  text: {
+    fontSize: 15,
+    lineHeight: 22,
+    color: "#64748b",
+    marginBottom: 4,
+  },
+  itemText: {
+    fontSize: 15,
+    color: "#0f172a",
+    fontWeight: "700",
+    marginBottom: 4,
+  },
+  warningText: {
+    marginTop: 10,
+    color: "#b91c1c",
+    backgroundColor: "#fee2e2",
+    padding: 10,
+    borderRadius: 12,
+    fontWeight: "800",
+  },
+  divider: {
+    height: 1,
+    backgroundColor: "#dbeafe",
+    marginVertical: 12,
+  },
+});
