@@ -19,7 +19,7 @@ type Recommendation = {
 };
 
 const userBehavior = {
-  pastSearches: ["Milk", "Eggs", "Bread"],
+  pastSearches: ["Milk", "Eggs", "Bread", "Apples"],
   comparedProducts: ["Milk", "Eggs"],
   weeklyBudget: 75,
 };
@@ -37,22 +37,22 @@ const demoRecommendations: Recommendation[] = [
   },
   {
     id: "2",
-    category: "Household",
-    title: "Household Restock Tip",
-    message: "You viewed cleaning items recently. This may be a good week to compare household deals.",
-    action: "Compare Household Deals",
+    category: "Produce",
+    title: "Fresh Produce Savings",
+    message: "You searched apples recently. Compare produce prices before your next grocery trip.",
+    action: "Compare Produce Deals",
     savingsScore: 76,
-    why: "Recommended because household items appeared in your recent deal activity.",
+    why: "Recommended because fruits appeared in your recent search history.",
 
   },
   {
     id: "3",
-    category: "Beauty",
-    title: "Beauty Savings Alert",
-    message: "Beauty items match your recent interest. Look for bundle discounts before buying.",
-    action: "View Beauty Deals",
+    category: "Groceries",
+    title: "Buy Bread & Apples Early in the Week",
+    message: "Fresh items like bread and apples are often better stocked and priced earlier in the week at Aldi.",
+    action: "Plan Early Grocery Trip",
     savingsScore: 81,
-    why: "Recommended because beauty deals match your recent activity pattern.",
+    why: "Recommended because your list includes fresh items that benefit from early shopping.",
 
   },
 ];
