@@ -1,3 +1,4 @@
+
 // user email is test@test.com ?
 // user password is 123456 ?
 // this first one is to test the set email if the eamil changes
@@ -32,6 +33,3 @@ export function PasswordVerification({ password }: passwordVerificationProps) {
         console.log("Error: Invalid email or password");
     }
 }
-
-
-
