@@ -9,36 +9,36 @@ import { findCheapest } from "@/utils/priceComparison";
 import { isValidBarcode } from "@/utils/barcodeValidation";
 import { CheapestProduct } from "@/types/store";
 
-async function fetchFoodNameFromBarcode(
-  barcode: string
+async function fetchFoodNameFromBarcode( // Fetch the name of a food item from its barcode
+  barcode: string // The barcode to search for
 ): Promise<string | null> {
   try {
     const response = await fetch(
-      `https://world.openfoodfacts.org/api/v2/product/${barcode}.json`
+      `https://world.openfoodfacts.org/api/v2/product/${barcode}.json` // Fetch the product data from Open Food Facts
     );
 
-    const data = await response.json();
+    const data = await response.json(); // Parse the JSON response
 
-    return data.product?.product_name || data.product?.generic_name || null;
+    return data.product?.product_name || data.product?.generic_name || null; // Return the product name or generic name, or null if not found
   } catch {
-    return null;
+    return null; // Return null if there's an error
   }
 }
 
 export default function BarcodePage() {
-  const [showScanner, setShowScanner] = useState(false);
-  const [searchProduct, setSearchProduct] = useState("");
-  const [cheapestProduct, setCheapestProduct] =
-    useState<CheapestProduct | null>(null);
+  const [showScanner, setShowScanner] = useState(false); // Whether to show the barcode scanner
+  const [searchProduct, setSearchProduct] = useState(""); // The product to search for
+  const [cheapestProduct, setCheapestProduct] = 
+    useState<CheapestProduct | null>(null); // The cheapest product found
 
   const handleSearch = () => {
     const result = findCheapest(searchProduct);
-    setCheapestProduct(result);
+    setCheapestProduct(result); // Update the state with the cheapest product
   };
 
   const handleScanResult = async (barcode: string) => {
     if (!isValidBarcode(barcode)) {
-      alert("Invalid barcode scanned.");
+      alert("Invalid barcode scanned."); // Alert the user that the scanned barcode is invalid
       return;
     }
 

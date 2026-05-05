@@ -4,37 +4,37 @@ import { BrowserMultiFormatReader } from "@zxing/browser";
 
 type BarcodeUploadProps = {
   onScan: (barcode: string) => void;
-};
+}; // Props for the BarcodeUpload component
 
 export default function BarcodeUpload({ onScan }: BarcodeUploadProps) {
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState(""); // message to display to the user
 
   const handleUpload = async () => {
-    const input = document.createElement("input");
+    const input = document.createElement("input"); // create a file input element
     input.type = "file";
     input.accept = "image/*";
 
     input.onchange = async () => {
-      const file = input.files?.[0];
+      const file = input.files?.[0]; // get the selected file
 
-      if (!file) return;
+      if (!file) return; 
 
       try {
         setMessage("Reading barcode...");
 
-        const imageUrl = URL.createObjectURL(file);
-        const reader = new BrowserMultiFormatReader();
+        const imageUrl = URL.createObjectURL(file); // create a URL for the selected image
+        const reader = new BrowserMultiFormatReader(); // create a new barcode reader
 
-        const result = await reader.decodeFromImageUrl(imageUrl);
+        const result = await reader.decodeFromImageUrl(imageUrl); // decode the barcode from the image
 
-        URL.revokeObjectURL(imageUrl);
+        URL.revokeObjectURL(imageUrl); // revoke the URL to free up memory
 
-        const barcode = result.getText();
+        const barcode = result.getText(); // get the text of the scanned barcode
 
         setMessage(`Found barcode: ${barcode}`);
         onScan(barcode);
       } catch (error) {
-        setMessage("Could not read barcode. Try a clearer image.");
+        setMessage("Could not read barcode. Try a clearer image."); // display an error message
       }
     };
 

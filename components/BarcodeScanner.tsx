@@ -3,17 +3,17 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { CameraView, useCameraPermissions } from "expo-camera";
 
 type BarcodeScannerProps = {
-  onScan: (barcode: string) => void;
-  onClose: () => void;
+  onScan: (barcode: string) => void; // open barcode scanner 
+  onClose: () => void; // close barcode scanner
 };
 
-export default function BarcodeScanner({
-  onScan,
+export default function BarcodeScanner({ // Props for the BarcodeScanner component
+  onScan, 
   onClose,
 }: BarcodeScannerProps) {
-  const [permission, requestPermission] = useCameraPermissions();
-  const [scanned, setScanned] = useState(false);
-  const [facing, setFacing] = useState<"front" | "back">("back");
+  const [permission, requestPermission] = useCameraPermissions(); // get camera permissions
+  const [scanned, setScanned] = useState(false); // track if a barcode has been scanned
+  const [facing, setFacing] = useState<"front" | "back">("back"); // track the camera facing
 
   if (!permission) {
     return (
@@ -33,7 +33,7 @@ export default function BarcodeScanner({
         </Text>
 
         <TouchableOpacity style={styles.primaryButton} onPress={requestPermission}>
-          <Text style={styles.primaryButtonText}>Allow Camera</Text>
+          <Text style={styles.primaryButtonText}>Allow Camera</Text> 
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.secondaryButton} onPress={onClose}>
@@ -41,7 +41,7 @@ export default function BarcodeScanner({
         </TouchableOpacity>
       </View>
     );
-  }
+  } // If no permission is available, show a message
 
   return (
     <View style={styles.cameraWrapper}>
@@ -67,7 +67,7 @@ export default function BarcodeScanner({
                 setScanned(true);
                 onScan(data);
               }
-        }
+        } // Handle barcode scanning
       />
 
       <View style={styles.buttonRow}>
@@ -86,7 +86,7 @@ export default function BarcodeScanner({
       </View>
     </View>
   );
-}
+} // Render the barcode scanner
 
 const styles = StyleSheet.create({
   container: {
