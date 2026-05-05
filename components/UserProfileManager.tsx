@@ -121,121 +121,120 @@ export default function UserProfileManager({ currentUser, onUpdate }: Props) { /
 }
 
 const styles = StyleSheet.create({ // Define the styles for the UserProfileManager component using StyleSheet
-  container: {
-    padding: 18,
-    backgroundColor: "#ffffff",
-    borderRadius: 22,
-    borderWidth: 1,
-    borderColor: "#dbeafe",
-    shadowColor: "#000000",
-    shadowOpacity: 0.06,
-    shadowRadius: 10,
-    elevation: 2,
+  container: { // Style for the main container of the user profile manager, designed to have a white background, rounded corners, border, and shadow for a clean and visually appealing appearance
+    padding: 18, // Add padding to the container for spacing
+    backgroundColor: "#ffffff", // Set the background color to white
+    borderRadius: 22, // Set the border radius to create rounded corners
+    borderWidth: 1, // Set the border width to create a visible border around the container
+    borderColor: "#dbeafe", // Set the border color to a light blue for a subtle and visually appealing border
+    shadowColor: "#000000", // Set the shadow color to black for a subtle shadow effect
+    shadowOpacity: 0.06, // Set the shadow opacity to a low value for a subtle shadow effect
+    elevation: 2, // Set the elevation to create a shadow effect on Android devices
   },
   title: {  // Style for the title text of the user profile manager
-    fontSize: 21,
-    fontWeight: "900",
-    color: "#1d4ed8",
-    marginBottom: 10,
+    fontSize: 21, // Set the font size for the title text
+    fontWeight: "900", // Set the font weight to 900 for a bold and prominent title
+    color: "#1d4ed8", // Set the text color to a vibrant blue to make the title stand out
+    marginBottom: 10,  // Add margin to the bottom of the title for spacing between the title and the next element
   },
   infoPill: { // Style for the info pill that displays the current user's ID, designed to be a rounded container with a background color and border
-    alignSelf: "flex-start",
-    backgroundColor: "#eff6ff",
-    borderWidth: 1,
-    borderColor: "#bfdbfe",
-    paddingVertical: 7,
-    paddingHorizontal: 12,
-    borderRadius: 999,
-    marginBottom: 14,
+    alignSelf: "flex-start", // Align the info pill to the start of the container
+    backgroundColor: "#eff6ff", // Set the background color to a light blue for a visually appealing info pill
+    borderWidth: 1, // Set the border width to create a visible border around the info pill
+    borderColor: "#bfdbfe", // Set the border color to a slightly darker blue to complement the background color of the info pill
+    paddingVertical: 7, // Add vertical padding to the info pill for spacing
+    paddingHorizontal: 12, // Add horizontal padding to the info pill for spacing
+    borderRadius: 999, // Set the border radius to a high value to create a fully rounded pill shape
+    marginBottom: 14, // Add margin to the bottom of the info pill for spacing between the info pill and the next element
   },
   infoPillText: { // Style for the text inside the info pill, designed to be bold and colored to match the overall theme
-    color: "#1e3a8a",
-    fontWeight: "800",
+    color: "#1e3a8a", // Set the text color to a darker blue to match the overall theme and ensure readability
+    fontWeight: "800", // Set the font weight to 800 for a bold and prominent text inside the info pill
   },
   label: { // Style for the label text that describes the search radius input field, designed to be bold and colored to match the overall theme
-    color: "#1e3a8a",
-    fontWeight: "800",
-    marginBottom: 7,
+    color: "#1e3a8a", // Set the text color to a darker blue to match the overall theme and ensure readability
+    fontWeight: "800", // Set the font weight to 800 for a bold and prominent label text
+    marginBottom: 7, // Add margin to the bottom of the label for spacing between the label and the input field
   },
   subtitle: { // Style for the subtitle text that introduces the shopping list section, designed to be bold and colored to match the overall theme, with additional margin for spacing
-    marginTop: 14,
-    marginBottom: 10,
-    fontSize: 17,
-    fontWeight: "900",
-    color: "#0f172a",
+    marginTop: 14, // Add margin to the top of the subtitle for spacing between the previous section and the subtitle
+    marginBottom: 10, // Add margin to the bottom of the subtitle for spacing between the subtitle and the shopping list items
+    fontSize: 17, // Set the font size for the subtitle text
+    fontWeight: "900", // Set the font weight to 900 for a bold and prominent subtitle
+    color: "#0f172a", // Set the text color to a very dark blue (almost black) to ensure readability and contrast with the background
   },
   row: { // Style for the container of each item in the shopping list, designed to be a horizontal row with gap and margin for spacing
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-    marginBottom: 10,
+    flexDirection: "row", // Set the flex direction to row to arrange the item name, quantity, and remove button horizontally
+    alignItems: "center", // Align items vertically to the center for a neat and organized appearance
+    gap: 8, // Add a gap between the item name, quantity, and remove button for spacing
+    marginBottom: 10, // Add margin to the bottom of each row for spacing between items in the shopping list
   },
   input: { // Style for the search radius input field, designed to have a border, background color, padding, and rounded corners for a clean and user-friendly appearance
-    borderWidth: 1,
-    borderColor: "#bfdbfe",
-    backgroundColor: "#f8fbff",
-    borderRadius: 14,
-    paddingVertical: 12,
-    paddingHorizontal: 14,
-    marginBottom: 10,
-    color: "#0f172a",
+    borderWidth: 1, // Set the border width to create a visible border around the input field
+    borderColor: "#bfdbfe", // Set the border color to a light blue to complement the overall theme and create a visually appealing input field
+    backgroundColor: "#f8fbff", // Set the background color to a very light blue for a clean and visually appealing input field
+    borderRadius: 14, // Set the border radius to create rounded corners for a more modern and user-friendly appearance
+    paddingVertical: 12, // Add vertical padding to the input field for spacing and improved touch targets
+    paddingHorizontal: 14, // Add horizontal padding to the input field for spacing and improved touch targets
+    marginBottom: 10, // Add margin to the bottom of the input field for spacing between the input field and the next element
+    color: "#0f172a", // Set the text color to a very dark blue (almost black) to ensure readability and contrast with the background of the input field
   },
   itemInput: { // Style for the item name input field in the shopping list, designed to have a border, background color, padding, and rounded corners for a clean and user-friendly appearance, with flex: 1 to allow it to take up available space in the row
-    flex: 1,
-    borderWidth: 1,
-    borderColor: "#bfdbfe",
-    backgroundColor: "#f8fbff",
-    borderRadius: 14,
-    paddingVertical: 12,
-    paddingHorizontal: 14,
-    color: "#0f172a",
+    flex: 1, // Allow the item name input field to take up available space in the row, ensuring that it can accommodate longer item names without breaking the layout
+    borderWidth: 1, // Set the border width to create a visible border around the item name input field
+    borderColor: "#bfdbfe", // Set the border color to a light blue to complement the overall theme and create a visually appealing input field
+    backgroundColor: "#f8fbff", // Set the background color to a very light blue for a clean and visually appealing input field
+    borderRadius: 14, // Set the border radius to create rounded corners for a more modern and user-friendly appearance
+    paddingVertical: 12, // Add vertical padding to the item name input field for spacing and improved touch targets
+    paddingHorizontal: 14, // Add horizontal padding to the item name input field for spacing and improved touch targets
+    color: "#0f172a", // Set the text color to a very dark blue (almost black) to ensure readability and contrast with the background of the input field
   },
   quantityInput: { // Style for the item quantity input field in the shopping list, designed to have a border, background color, padding, and rounded corners for a clean and user-friendly appearance, with a fixed width to ensure it does not take up too much space in the row
-    width: 75,
-    borderWidth: 1,
-    borderColor: "#bfdbfe",
-    backgroundColor: "#f8fbff",
-    borderRadius: 14,
-    paddingVertical: 12,
-    paddingHorizontal: 14,
-    color: "#0f172a",
+    width: 75, // Set a fixed width for the quantity input field to ensure it does not take up too much space in the row, while still allowing enough room for typical quantity values
+    borderWidth: 1, // Set the border width to create a visible border around the quantity input field
+    borderColor: "#bfdbfe", // Set the border color to a light blue to complement the overall theme and create a visually appealing input field
+    backgroundColor: "#f8fbff", // Set the background color to a very light blue for a clean and visually appealing input field
+    borderRadius: 14, // Set the border radius to create rounded corners for a more modern and user-friendly appearance
+    paddingVertical: 12, // Add vertical padding to the quantity input field for spacing and improved touch targets
+    paddingHorizontal: 14, // Add horizontal padding to the quantity input field for spacing and improved touch targets
+    color: "#0f172a", // Set the text color to a very dark blue (almost black) to ensure readability and contrast with the background of the input field
   },
   removeButton: { // Style for the remove button in the shopping list, designed to be a circular button with a background color that stands out, and centered content for the "×" symbol
-    width: 42,
-    height: 42,
-    borderRadius: 21,
-    backgroundColor: "#dbeafe",
-    justifyContent: "center",
-    alignItems: "center",
+    width: 42, // Set a fixed width for the remove button to create a circular shape
+    height: 42, // Set a fixed height for the remove button to create a circular shape
+    borderRadius: 21, // Set the border radius to half of the width and height to create a circular shape
+    backgroundColor: "#dbeafe", // Set the background color to a light blue that stands out against the overall theme, making it clear that this button is for removing items
+    justifyContent: "center", // Center the content of the remove button vertically
+    alignItems: "center",  // Center the content of the remove button horizontally
   },
   removeButtonText: { // Style for the text inside the remove button, designed to be a large "×" symbol that is bold and colored to match the overall theme
-    color: "#1d4ed8",
-    fontSize: 24,
-    fontWeight: "900",
-    lineHeight: 26,
+    color: "#1d4ed8", // Set the text color to a vibrant blue to match the overall theme and ensure readability against the background of the remove button
+    fontSize: 24, // Set the font size to 24 to make the "×" symbol large and easily recognizable as a remove action
+    fontWeight: "900", // Set the font weight to 900 for a bold and prominent "×" symbol that clearly indicates its purpose as a remove button
+    lineHeight: 26, // Set the line height to ensure that the "×" symbol is vertically centered within the remove button, especially on Android devices where font rendering can differ
   },
   secondaryButton: { // Style for the secondary button used to add items to the shopping list, designed to have a background color that stands out, padding, and rounded corners for a clean and user-friendly appearance
-    backgroundColor: "#eff6ff",
-    borderWidth: 1,
-    borderColor: "#bfdbfe",
-    paddingVertical: 13,
-    borderRadius: 14,
-    marginTop: 8,
+    backgroundColor: "#eff6ff", // Set the background color to a light blue that stands out against the overall theme, making it clear that this button is for adding items
+    borderWidth: 1, // Set the border width to create a visible border around the secondary button
+    borderColor: "#bfdbfe", // Set the border color to a light blue to complement the background color of the secondary button and create a visually appealing button
+    paddingVertical: 13, // Add vertical padding to the secondary button for spacing and improved touch targets
+    borderRadius: 14, // Set the border radius to create rounded corners for a more modern and user-friendly appearance
+    marginTop: 8, // Add margin to the top of the secondary button for spacing between the button and the previous element (the shopping list items)
   },
   secondaryButtonText: { // Style for the text inside the secondary button, designed to indicate that it is a secondary action with a color that matches the overall theme and bold font weight
-    color: "#1d4ed8",
-    textAlign: "center",
-    fontWeight: "900",
+    color: "#1d4ed8", // Set the text color to a vibrant blue to match the overall theme and ensure readability against the background of the secondary button
+    textAlign: "center", // Center the text horizontally within the secondary button
+    fontWeight: "900", // Set the font weight to 900 for a bold and prominent text that clearly indicates its purpose as an action button for adding items
   },
   primaryButton: { // Style for the primary button used to save the profile changes, designed to have a background color that stands out and indicates a primary action, with padding and rounded corners for a clean and user-friendly appearance
-    backgroundColor: "#2563eb",
-    paddingVertical: 14,
-    borderRadius: 14,
-    marginTop: 10,
+    backgroundColor: "#2563eb", // Set the background color to a vibrant blue that stands out against the overall theme, making it clear that this button is for saving the profile changes and is a primary action
+    paddingVertical: 14, // Add vertical padding to the primary button for spacing and improved touch targets
+    borderRadius: 14, // Set the border radius to create rounded corners for a more modern and user-friendly appearance
+    marginTop: 10, // Add margin to the top of the primary button for spacing between the button and the previous element (the add item button)
   },
   primaryButtonText: { // Style for the text inside the primary button, designed to indicate that it is a primary action with a color that contrasts well with the button's background and a bold font weight
-    color: "#ffffff",
-    textAlign: "center",
-    fontWeight: "900",
+    color: "#ffffff", // Set the text color to white to contrast well with the vibrant blue background of the primary button, ensuring readability and making it clear that this is a primary action
+    textAlign: "center", // Center the text horizontally within the primary button
+    fontWeight: "900", // Set the font weight to 900 for a bold and prominent text that clearly indicates its purpose as an action button for saving the profile changes
   },
 });
