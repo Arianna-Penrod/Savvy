@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { router } from "expo-router";
 import LoginForm from "@/components/LoginForm";
+// this will be the first page that the user sees, they will be prompted to login
+// after logging in they will go to the langing page
 
 export default function Index() {
   const [email, setEmail] = useState("");
