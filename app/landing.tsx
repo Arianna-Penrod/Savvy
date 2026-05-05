@@ -10,8 +10,8 @@ import AppLayout from "@/components/AppLayout";
 import LocationPermissionModal from "@/components/LocationPerms";
 import ScreenMessage from "@/components/ScreenMessage";
 import StoreMap from "@/components/StoreMap.web";
-import { useUserLocation } from "@/hooks/useUserLocation";
-import { useNearbyStores } from "@/hooks/useNearbyStores";
+import { useUserLocation } from "@/utils/useUserLocation";
+import { useNearbyStores } from "@/utils/useNearbyStores";
 
 function getDistanceMiles(
   lat1: number,
