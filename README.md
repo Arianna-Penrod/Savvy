@@ -2,7 +2,7 @@ GroupG_Ticket5Spring1CodeReview_CS3203Spring26
 
 # Savvy
 
-A web application that helps users save money by tracking spending habits and finding cheaper alternatives near their location using AI-driven personalization.
+A web application that helps users save money finding cheap stores near their location and making personalized spending recommendations.
 
 URL: https://savvy.expo.app/
 
@@ -29,7 +29,6 @@ Install these **before** cloning the repo:
   https://github.com/git-guides/install-git
   
   - Check: `git --version`
-  - 
   - Check that your GitHub is connected:
   `git config --global user.name`
    AND `git config --global user.email`
