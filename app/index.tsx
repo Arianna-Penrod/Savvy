@@ -13,7 +13,7 @@ export default function Index() {
 
   // Validate credentials and navigate on success
   const handleLogin = () => {
-    if (email.trim() === "Test@test.com" && password === "123456") {
+    if (email.trim() === "test@test.com" && password === "123456") {
       setLoginError("");
       router.replace("/landing"); // Go to landing page after successful login
     } else {
