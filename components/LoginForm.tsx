@@ -26,24 +26,29 @@ export default function LoginForm({
   onSubmit,
 }: LoginFormProps) {
   return (
+    // Adjusts layout when keyboard appears
     <KeyboardAvoidingView
       style={styles.page}
       behavior={Platform.OS === "ios" ? "padding" : undefined}
     >
+      {/* Decorative background circles */}
       <View style={styles.circleOne} />
       <View style={styles.circleTwo} />
 
+      {/* Main login card */}
       <View style={styles.card}>
         <View style={styles.logoBubble}>
           <Text style={styles.logoText}>S</Text>
         </View>
 
+        {/* App branding */}
         <Text style={styles.appName}>Savvy</Text>
         <Text style={styles.title}>Welcome back</Text>
         <Text style={styles.subtitle}>
           Sign in to find nearby stores, compare prices, and manage your shopping list.
         </Text>
 
+        {/* Email input */}
         <View style={styles.formGroup}>
           <Text style={styles.label}>Email</Text>
           <TextInput
@@ -57,6 +62,7 @@ export default function LoginForm({
           />
         </View>
 
+        {/* Password input */}
         <View style={styles.formGroup}>
           <Text style={styles.label}>Password</Text>
           <TextInput
@@ -70,12 +76,15 @@ export default function LoginForm({
           />
         </View>
 
+        {/* Error message */}
         {error ? <Text style={styles.error}>{error}</Text> : null}
 
+        {/* Submit button */}
         <TouchableOpacity style={styles.button} onPress={onSubmit}>
           <Text style={styles.buttonText}>Log In</Text>
         </TouchableOpacity>
 
+        {/* Demo credentials hint */}
         <Text style={styles.hint}>Demo login: test@test.com / 123456</Text>
       </View>
     </KeyboardAvoidingView>
