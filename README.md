@@ -2,7 +2,7 @@ GroupG_Ticket5Spring1CodeReview_CS3203Spring26
 
 # Savvy
 
-An iOS + Android app that helps users save money by tracking spending habits and finding cheaper alternatives near their location using AI-driven personalization.
+A web application that helps users save money by tracking spending habits and finding cheaper alternatives near their location using AI-driven personalization.
 
 URL: https://savvy.expo.app/
 
