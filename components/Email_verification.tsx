@@ -5,6 +5,7 @@ this first one is to test the set email if the eamil changes
 then this code will need to change
 read in email*/}
 
+
 type emailVerificationProps = {
     email: string;
 };
