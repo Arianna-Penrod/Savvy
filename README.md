@@ -2,7 +2,7 @@ GroupG_Ticket5Spring1CodeReview_CS3203Spring26
 
 # Savvy
 
-A web application that helps users save money finding cheap stores near their location and making personalized spending recommendations.
+A web application that helps users save money by finding cheap stores near their location and making personalized spending recommendations.
 
 URL: https://savvy.expo.app/
 
