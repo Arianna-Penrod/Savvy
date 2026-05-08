@@ -65,59 +65,91 @@ export default function UserProfileManager({ currentUser, onUpdate }: Props) { /
    The styles are defined using StyleSheet to ensure a consistent and visually appealing design.
   */
   return (
-    <View style={styles.container}> // Main container for the user profile manager, styled with padding, background color, border, and shadow
-      <Text style={styles.title}>Shopping Preferences</Text> // Title text for the user profile manager
+    <View style={styles.container}>
+      {/* Main container for the user profile manager, styled with padding, background color, border, and shadow */}
+      <Text style={styles.title}>Shopping Preferences</Text>
+      {/* Title text for the user profile manager */}
 
-      <View style={styles.infoPill}> // A styled container (info pill) to display the current user's ID
-        <Text style={styles.infoPillText}>User ID: {currentUser.userID}</Text> // Display the current user's ID in an info pill style
+      <View style={styles.infoPill}>
+        {/* A styled container (info pill) to display the current user's ID */}
+        <Text style={styles.infoPillText}>User ID: {currentUser.userID}</Text>
+        {/* Display the current user's ID in an info pill style */}
       </View>
 
-      <Text style={styles.label}>Search Radius in Miles</Text> // Label for the search radius input field
+      <Text style={styles.label}>Search Radius in Miles</Text>
+      {/* Label for the search radius input field */}
+      {/* Style for the search radius input field */}
+      {/* The value of the search radius input field, bound to the radius state */}
+      {/* Update the radius state when the text in the input field changes */}
+      {/* Set the keyboard type to numeric for easier input of numbers */}
+      {/* Placeholder text for the search radius input field */}
+      {/* Placeholder text color for the search radius input field */}
       <TextInput
-        style={styles.input} // Style for the search radius input field
-        value={radius} // The value of the search radius input field, bound to the radius state
-        onChangeText={setRadius} // Update the radius state when the text in the input field changes
-        keyboardType="numeric" // Set the keyboard type to numeric for easier input of numbers
-        placeholder="Example: 10" // Placeholder text for the search radius input field
-        placeholderTextColor="#94a3b8" // Placeholder text color for the search radius input field
+        style={styles.input}
+        value={radius}
+        onChangeText={setRadius}
+        keyboardType="numeric"
+        placeholder="Example: 10"
+        placeholderTextColor="#94a3b8"
       />
 
-      <Text style={styles.subtitle}>Shopping List</Text> // Subtitle for the shopping list section
+      <Text style={styles.subtitle}>Shopping List</Text>
+      {/* Subtitle for the shopping list section */}
 
-      {list.map((item, index) => ( // Map over the shopping list items and render a row for each item, allowing the user to edit the name and quantity of each item
-        <View key={index} style={styles.row}> // Container for each item in the shopping list, styled as a row with gap and margin
+      {list.map((item, index) => (
+        <View key={index} style={styles.row}>
+          {/* Map over the shopping list items and render a row for each item, allowing the user to edit the name and quantity of each item */}
+          {/* Container for each item in the shopping list, styled as a row with gap and margin */}
+          {/* Style for the item name input field */}
+          {/* The value of the item name input field, bound to the name property of the current item */}
+          {/* Placeholder text for the item name input field */}
+          {/* Placeholder text color for the item name input field */}
+          {/* Update the name of the item in the shopping list when the text in the input field changes, using the handleItemChange function */}
           <TextInput
-            style={styles.itemInput} // Style for the item name input field
-            value={item.name} // The value of the item name input field, bound to the name property of the current item
-            placeholder="Item" // Placeholder text for the item name input field
-            placeholderTextColor="#94a3b8" // Placeholder text color for the item name input field
-            onChangeText={(text) => handleItemChange(index, "name", text)} // Update the name of the item in the shopping list when the text in the input field changes, using the handleItemChange function
+            style={styles.itemInput}
+            value={item.name}
+            placeholder="Item"
+            placeholderTextColor="#94a3b8"
+            onChangeText={(text) => handleItemChange(index, "name", text)}
           />
 
+          {/* Style for the item quantity input field */}
+          {/* The value of the item quantity input field, bound to the quantity property of the current item, converted to a string */}
+          {/* Placeholder text for the item quantity input field */}
+          {/* Placeholder text color for the item quantity input field */}
+          {/* Set the keyboard type to numeric for easier input of numbers */}
+          {/* Update the quantity of the item in the shopping list when the text in the input field changes, using the handleItemChange function */}
           <TextInput
-            style={styles.quantityInput} // Style for the item quantity input field
-            value={item.quantity.toString()} // The value of the item quantity input field, bound to the quantity property of the current item, converted to a string
-            placeholder="Qty" // Placeholder text for the item quantity input field
-            placeholderTextColor="#94a3b8" // Placeholder text color for the item quantity input field
-            keyboardType="numeric" // Set the keyboard type to numeric for easier input of numbers
-            onChangeText={(text) => handleItemChange(index, "quantity", text)} // Update the quantity of the item in the shopping list when the text in the input field changes, using the handleItemChange function
+            style={styles.quantityInput}
+            value={item.quantity.toString()}
+            placeholder="Qty"
+            placeholderTextColor="#94a3b8"
+            keyboardType="numeric"
+            onChangeText={(text) => handleItemChange(index, "quantity", text)}
           />
 
+          {/* Style for the remove button, which is a circular button with a background color */}
+          {/* Call the removeItem function with the index of the item to be removed when the button is pressed */}
           <TouchableOpacity
-            style={styles.removeButton} // Style for the remove button, which is a circular button with a background color
-            onPress={() => removeItem(index)} // Call the removeItem function with the index of the item to be removed when the button is pressed
+            style={styles.removeButton}
+            onPress={() => removeItem(index)}
           >
-            <Text style={styles.removeButtonText}>×</Text> // Text for the remove button, styled to be a large "×" symbol to indicate removal
+            <Text style={styles.removeButtonText}>×</Text>
+            {/* Text for the remove button, styled to be a large "×" symbol to indicate removal */}
           </TouchableOpacity>
         </View>
       ))}
 
-      <TouchableOpacity style={styles.secondaryButton} onPress={addItem}> // Button to add a new item to the shopping list, styled as a secondary button
-        <Text style={styles.secondaryButtonText}>Add Item</Text> // Text for the add item button, styled to indicate that it is a secondary action
+      <TouchableOpacity style={styles.secondaryButton} onPress={addItem}>
+        {/* Button to add a new item to the shopping list, styled as a secondary button */}
+        <Text style={styles.secondaryButtonText}>Add Item</Text>
+        {/* Text for the add item button, styled to indicate that it is a secondary action */}
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.primaryButton} onPress={handleSave}> // Button to save the profile changes, styled as a primary button
-        <Text style={styles.primaryButtonText}>Save Profile</Text> // Text for the save profile button, styled to indicate that it is a primary action
+      <TouchableOpacity style={styles.primaryButton} onPress={handleSave}>
+        {/* Button to save the profile changes, styled as a primary button */}
+        <Text style={styles.primaryButtonText}>Save Profile</Text>
+        {/* Text for the save profile button, styled to indicate that it is a primary action */}
       </TouchableOpacity>
     </View>
   );
