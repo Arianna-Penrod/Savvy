@@ -26,7 +26,7 @@ export default function LoginForm({
   onSubmit,
 }: LoginFormProps) {
   return (
-    // Adjusts layout when keyboard appears
+    // Adjusts the layout when keyboard appears
     <KeyboardAvoidingView
       style={styles.page}
       behavior={Platform.OS === "ios" ? "padding" : undefined}
