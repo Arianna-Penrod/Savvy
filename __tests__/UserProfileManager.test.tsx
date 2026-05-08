@@ -2,6 +2,8 @@ import React from "react";
 import { render, fireEvent } from "@testing-library/react-native";
 import UserProfileManager from "../components/UserProfileManager";
 
+global.alert = jest.fn();
+
 describe("UserProfileManager Component Tests", () => {
   const mockUser = {
   userID: "1",
