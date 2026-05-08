@@ -112,7 +112,7 @@ git commit -m "Short summary of change" -m "Longer summary if needed"
 git push
 ```
 
-### Push and Pull
+### Pull and Push
 
 ```bash
 git pull
@@ -134,20 +134,27 @@ git push
 
 To pull
 ```bash
-git push
+git pull
 ```
+
+To see the current working tree
 ```bash
 git branch
 ```
 
 To switch to a different branch
 ```bash
-git checkount branch-name
+git checkout branch-name
 ```
 
 To compare local repo to remote repo
 ```bash
 git status
+```
+
+To run the tests before pushing
+```bash
+npm run test
 ```
 
 ---
@@ -164,7 +171,7 @@ Make small commits with clear messages
 
 Keep changes focused (one feature/fix per branch)
 
-Run lint before pushing (or before committing if hooks are installed, we will implement this soon)
+Run the tests before pushing
 
 🚫 Don’t:
 
@@ -172,13 +179,13 @@ Do not commit node_modules/
 
 Don’t commit .env files or keys plz
 
-Try not to edit files not necessary to development mean to touch (especially lockfiles) unless required and communicated within the team
+Try not to edit files not necessary to development (especially lockfiles) unless required and communicated within the team
 
 ---
 
 ## Branching & Pull Requests
 
-Branch names: feature/..., fix/..., chore/...
+Branch names: feature-new, fix-file, etc.
 
 Pull requests should:
 - Describe what changed
@@ -203,12 +210,10 @@ git merge origin/main
 - assets/ — images, icons
 - types/ — TypeScript types (we will add this soon)
 - utils/ — helpers (we will add this soon too)
+- data/ - holds the demo data we will use
 
 FLOWCHART
-
 ![App Layout](flowchart.png)
-
-
 
 ---
 ## Troubleshooting
