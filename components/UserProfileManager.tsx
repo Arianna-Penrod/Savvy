@@ -1,17 +1,20 @@
-// TO DO: Comment on each line of code in this file to explain what it does and how it works. This will help other developers understand the purpose of each part of the code and how the component functions as a whole.
+// UserProfileManager component
+// This component allows users to manage shopping preferences such as: search radius, shopping list items, and item quantities.
+// It provides an interface for users to view and edit their shopping preferences, and save the changes to their profile.
+
 import {
   View,
   Text,
   TextInput,
   TouchableOpacity,
   StyleSheet,
-} from "react-native"; // Make sure to import StyleSheet from react-native
-import { useState } from "react"; // Import useState from React
-import { user } from "@/data/demoUser"; // Import the user type from the data file
+} from "react-native"; // Import React Native UI components to build the profile interface
+import { useState } from "react"; // Import useState from React to manage component state
+import { user } from "@/data/demoUser"; // Import the user type from the data file for consistent profile structure
 
 type Props = { // Define the props for the UserProfileManager component
   currentUser: user;   // The current user's profile data
-  onUpdate: (updatedUser: user) => void;  // A callback function to handle profile updates
+  onUpdate: (updatedUser: user) => void;  // A function used to save profile changes
 };
 
 export default function UserProfileManager({ currentUser, onUpdate }: Props) { // Define the UserProfileManager component
@@ -119,6 +122,7 @@ export default function UserProfileManager({ currentUser, onUpdate }: Props) { /
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({ // Define the styles for the UserProfileManager component using StyleSheet
   container: { // Style for the main container of the user profile manager, designed to have a white background, rounded corners, border, and shadow for a clean and visually appealing appearance
